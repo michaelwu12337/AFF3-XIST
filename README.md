@@ -1,2 +1,1 @@
-# Figure-2-code
-Code for Figure 2
+# Code for AFF3 paper
