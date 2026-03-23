@@ -3,3 +3,23 @@
 ### Download link for processed files
 
 ### Analysis script structure
+scripts/
+│
+├── Figure_2/
+│   ├── Fig2B_scatter_female.R
+│   ├── Fig2B_scatter_male.R
+│   ├── Fig2C_venn_down.R
+│   ├── Fig2C_venn_up.R
+│   ├── Fig2D_GO_female.R
+│   ├── Fig2D_GO_male.R
+│   ├── Fig2E_heatmap_cardiac.R
+│   ├── Fig2E_heatmap_germlayer.R
+│   ├── Fig2E_heatmap_hematopoiesis.R
+│   └── Fig2E_heatmap_neural.R
+│
+├── Figure_3/
+│   ├── Fig3C_3E_lineage_trace.ipynb
+│   ├── 02_integration.ipynb
+│   ├── 03_annotation.ipynb
+│   ├── 04_blood_trajectory.ipynb
+│   └── 05_endo_subtype.ipynb
