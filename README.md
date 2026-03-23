@@ -3,6 +3,8 @@
 ### Download link for processed files
 
 ### Analysis script structure
+
+```text
 scripts/
 │
 ├── Figure_2/
@@ -23,3 +25,4 @@ scripts/
 │   ├── 03_annotation.ipynb
 │   ├── 04_blood_trajectory.ipynb
 │   └── 05_endo_subtype.ipynb
+```
