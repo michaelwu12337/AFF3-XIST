@@ -28,4 +28,18 @@ scripts/
 │   ├── 03_annotation.ipynb
 │   ├── 04_blood_trajectory.ipynb
 │   └── 05_endo_subtype.ipynb
+│
+├── Figure_4/
+│   ├── Fig4A_public_dataset_violin.R
+│   ├── 02_integration.ipynb
+│   ├── 03_annotation.ipynb
+│   ├── 04_blood_trajectory.ipynb
+│   └── 05_endo_subtype.ipynb
+│
+├── Figure_5/
+│   ├── Fig3C_3E_lineage_trace.ipynb
+│   ├── 02_integration.ipynb
+│   ├── 03_annotation.ipynb
+│   ├── 04_blood_trajectory.ipynb
+│   └── 05_endo_subtype.ipynb
 ```
