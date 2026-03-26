@@ -32,6 +32,14 @@ scripts/
 │   └── Fig2E_heatmap_neural.R
 │
 ├── Figure-3/
+│   ├── source_files/
+│       ├── celltype_v2_top50_markers.csv
+│       ├── d8_ko_1_1_mm_counts_revised.txt
+│       ├── d8_ko_1_2_mm_counts_revised.txt
+│       ├── d8_ko_2_1_mm_counts_revised.txt
+│       ├── d8_ko_2_2_mm_counts_revised.txt
+│       ├── d8_wt_1_mm_counts_revised.txt
+│       └── d8_wt_2_mm_counts_revised.txt
 │   ├── Fig3C_3E_lineage_trace.ipynb
 │   ├── Fig3D_cluster_percentage.R
 │   └── Fig3F_fate_percentage.R
