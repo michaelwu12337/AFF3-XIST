@@ -19,7 +19,7 @@ scripts/
 │       ├── AFF3_M_KO_1_1_mm_counts_revised.txt
 │       ├── AFF3_M_KO_1_2_mm_counts_revised.txt
 │       ├── AFF3_M_WT_1_mm_counts_revised.txt
-│       ├── AFF3_M_WT_2_mm_counts_revised.txt
+│       └── AFF3_M_WT_2_mm_counts_revised.txt
 │   ├── Fig2B_scatter_female.R
 │   ├── Fig2B_scatter_male.R
 │   ├── Fig2C_venn_down.R
