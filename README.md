@@ -10,7 +10,7 @@ goes here
 ```text
 scripts/
 │
-├── Figure_2/
+├── Figure-2/
 │   ├── Fig2B_scatter_female.R
 │   ├── Fig2B_scatter_male.R
 │   ├── Fig2C_venn_down.R
@@ -22,19 +22,19 @@ scripts/
 │   ├── Fig2E_heatmap_hematopoiesis.R
 │   └── Fig2E_heatmap_neural.R
 │
-├── Figure_3/
+├── Figure-3/
 │   ├── Fig3C_3E_lineage_trace.ipynb
 │   ├── Fig3D_cluster_percentage.R
 │   └── Fig3F_fate_percentage.R
 │
-├── Figure_4/
+├── Figure-4/
 │   ├── Fig4A_public_dataset_violin.R **(change source file format to txt, currently is csv)**
 │   ├── Fig4B_AFF3_expression_timepoint_comparison.R
 │   ├── Fig4C_4D_scRNA.ipynb **(need source file with scRNA raw QC and processing)**
 │   ├── 04_blood_trajectory.ipynb
 │   └── 05_endo_subtype.ipynb
 │
-├── Figure_5/
+├── Figure-5/
 │   ├── Fig3C_3E_lineage_trace.ipynb
 │   ├── 02_integration.ipynb
 │   ├── 03_annotation.ipynb
