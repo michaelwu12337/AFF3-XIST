@@ -52,8 +52,8 @@ scripts/
 │   │   ├── AFF3_F_KO_Xt_KO_A3_2_mm_counts_revised.txt
 │   │   ├── AFF3_F_WT_1_mm_counts_revised.txt
 │   │   └── AFF3_F_WT_1_mm_counts_revised.txt
-│   ├── Fig4A_public_dataset_violin.R **(change source file format to txt, currently is csv)**
-│   ├── Fig4B_AFF3_expression_timepoint_comparison.R
+│   ├── Fig4A_public_dataset_violin.R 
+│   ├── Fig4B_AFF3_expression_timepoint_comparison.R **(change source file format to txt, currently is csv)**
 │   ├── Fig4C_4D_scRNA.ipynb **(need source file with scRNA raw QC and processing)**
 │   ├── Fig4F_RNA_FISH.R
 │   ├── Fig4K_Heatmap **(need to clarify where the gene list in the code is coming from)**
