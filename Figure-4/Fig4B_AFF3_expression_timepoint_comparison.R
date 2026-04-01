@@ -13,7 +13,6 @@
   library(ggbreak)
 }
 
-
 # DESeq2 ------------------------------------------------------------------
 {
   path <- "~/Library/CloudStorage/OneDrive-Personal/HKU PhD/Figure 4 new/4B barplot/txt files/"
