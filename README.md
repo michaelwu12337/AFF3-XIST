@@ -49,7 +49,8 @@ scripts/
 │   ├── Fig4B_AFF3_expression_timepoint_comparison.R
 │   ├── Fig4C_4D_scRNA.ipynb **(need source file with scRNA raw QC and processing)**
 │   ├── Fig4F_RNA_FISH.R
-│   └── Fig4K_Heatmap **(need to clarify where the gene list in the code is coming from)**
+│   ├── Fig4K_Heatmap **(need to clarify where the gene list in the code is coming from)**
+│   └── Fig4L_GO **(need to clarify where the gene_list and gene_list_GO object)**
 │
 ├── Figure-5/
 │   ├── Fig3C_3E_lineage_trace.ipynb
