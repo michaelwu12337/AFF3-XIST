@@ -1,14 +1,14 @@
 # Code for AFF3 paper
 
 ### Download link for processed files
+
 ```text
 goes here
 ```
 
 ### Analysis script structure
 
-<details>
-<summary><strong>Figure-2</strong></summary>
+## Figure-2
 
 ```text
 Figure-2/
@@ -41,10 +41,9 @@ Figure-2/source_files/
 
 </details>
 
-</details>
+---
 
-<details>
-<summary><strong>Figure-3</strong></summary>
+## Figure-3
 
 ```text
 Figure-3/
@@ -69,10 +68,9 @@ Figure-3/source_files/
 
 </details>
 
-</details>
+---
 
-<details>
-<summary><strong>Figure-4</strong></summary>
+## Figure-4
 
 ```text
 Figure-4/
@@ -99,10 +97,9 @@ Figure-4/source_files/
 
 </details>
 
-</details>
+---
 
-<details>
-<summary><strong>Figure-5</strong></summary>
+## Figure-5
 
 ```text
 Figure-5/
@@ -111,22 +108,4 @@ Figure-5/
 ├── 03_annotation.ipynb
 ├── 04_blood_trajectory.ipynb
 └── 05_endo_subtype.ipynb
-```
-
-</details>
-│   │   ├── AFF3_F_WT_1_mm_counts_revised.txt
-│   │   └── AFF3_F_WT_1_mm_counts_revised.txt
-│   ├── Fig4A_public_dataset_violin.R 
-│   ├── Fig4B_AFF3_expression_timepoint_comparison.R **(change source file format to txt, currently is csv)**
-│   ├── Fig4C_4D_scRNA.ipynb **(need source file with scRNA raw QC and processing)**
-│   ├── Fig4F_RNA_FISH.R
-│   ├── Fig4K_Heatmap **(need to clarify where the gene list in the code is coming from)**
-│   └── Fig4L_GO **(need to clarify where the gene_list and gene_list_GO object)**
-│
-├── Figure-5/
-│   ├── Fig3C_3E_lineage_trace.ipynb
-│   ├── 02_integration.ipynb
-│   ├── 03_annotation.ipynb
-│   ├── 04_blood_trajectory.ipynb
-│   └── 05_endo_subtype.ipynb
 ```
