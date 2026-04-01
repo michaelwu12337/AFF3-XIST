@@ -20,8 +20,24 @@
   files <- list.files(path, pattern = "\\.txt$", full.names = TRUE)
   
   for (f in files) {
-    name <- tools::file_path_sans_ext(basename(f))  # filename without .txt
+    name <- tools::file_path_sans_ext(basename(f))
     assign(name, read.table(f, header = TRUE))
+  }
+  
+  old_names <- ls(pattern = "^(AFF3_|d8_)")
+  
+  new_names <- old_names %>%
+    gsub("^AFF3_", "d8_", .) %>%   # AFF3 → d8
+    gsub("_f_", "_F_", .) %>%      # f → F
+    gsub("_m_", "_M_", .) %>%      # m → M
+    gsub("_KO_", "_ko_", .) %>%    # KO → ko
+    gsub("_WT_", "_wt_", .)        # WT → wt
+  
+  for (i in seq_along(old_names)) {
+    if (old_names[i] != new_names[i]) {
+      assign(new_names[i], get(old_names[i]))
+      rm(list = old_names[i])
+    }
   }
 }
 {
