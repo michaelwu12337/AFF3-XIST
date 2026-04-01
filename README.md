@@ -74,12 +74,13 @@ Figure-3/source_files/
 
 ```text
 Figure-4/
+Figure-4/
 ├── Fig4A_public_dataset_violin.R
-├── Fig4B_AFF3_expression_timepoint_comparison.R
-├── Fig4C_4D_scRNA.ipynb
-├── Fig4F_RNA_FISH.R
-├── Fig4K_heatmap.R
-└── Fig4L_GO.R
+├── Fig4B_AFF3_expression_timepoint_comparison.R 
+├── Fig4C_4D_scRNA.ipynb (need source file with scRNA raw QC and processing)
+├── Fig4F_RNA_FISH.R (need file or code to show how to get intensity data)
+├── Fig4K_heatmap.R (need to clarify where the gene list in the code is coming from)
+└── Fig4L_GO.R (need to clarify where the gene_list and gene_list_GO object come from)
 ```
 
 <details>
