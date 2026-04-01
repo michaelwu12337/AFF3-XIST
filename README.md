@@ -46,13 +46,12 @@ scripts/
 │
 ├── Figure-4/
 │   ├── source_files/
-│   │   ├── celltype_v2_top50_markers.csv
-│   │   ├── d8_ko_1_1_mm_counts_revised.txt
-│   │   ├── d8_ko_1_2_mm_counts_revised.txt
-│   │   ├── d8_ko_2_1_mm_counts_revised.txt
-│   │   ├── d8_ko_2_2_mm_counts_revised.txt
-│   │   ├── d8_wt_1_mm_counts_revised.txt
-│   │   └── d8_wt_2_mm_counts_revised.txt
+│   │   ├── AFF3_F_KO_1_mm_counts_revised.txt
+│   │   ├── AFF3_F_KO_2_mm_counts_revised.txt
+│   │   ├── AFF3_F_KO_Xt_KO_A3_1_mm_counts_revised.txt
+│   │   ├── AFF3_F_KO_Xt_KO_A3_2_mm_counts_revised.txt
+│   │   ├── AFF3_F_WT_1_mm_counts_revised.txt
+│   │   └── AFF3_F_WT_1_mm_counts_revised.txt
 │   ├── Fig4A_public_dataset_violin.R **(change source file format to txt, currently is csv)**
 │   ├── Fig4B_AFF3_expression_timepoint_comparison.R
 │   ├── Fig4C_4D_scRNA.ipynb **(need source file with scRNA raw QC and processing)**
