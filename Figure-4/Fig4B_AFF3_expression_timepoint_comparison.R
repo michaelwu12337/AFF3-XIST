@@ -16,12 +16,42 @@
 
 # DESeq2 ------------------------------------------------------------------
 {
-  counts_Data <- read.csv("counts_data_new.csv", row.names = "Geneid")
-  col_Data <- read.csv("sample_info_new.csv", row.names = 1)
+  path <- "~/Library/CloudStorage/OneDrive-Personal/HKU PhD/Figure 4 new/4B barplot/txt files/"
+  files <- list.files(path, pattern = "\\.txt$", full.names = TRUE)
   
+  for (f in files) {
+    name <- tools::file_path_sans_ext(basename(f))  # filename without .txt
+    assign(name, read.table(f, header = TRUE))
+  }
+}
+{
+  df_list <- mget(ls(pattern = "_counts_revised$"))
+  
+  counts_Data <- do.call(
+    cbind,
+    lapply(df_list, function(df) df$counts)
+  )
+  
+  colnames(counts_Data) <- names(df_list)
+  rownames(counts_Data) <- df_list[[1]]$Geneid
+}
+{
+  sample_names <- colnames(counts_Data)
+  
+  col_Data <- data.frame(
+    Time_point = as.numeric(sub("^d([0-9]+)_.*", "\\1", sample_names)),
+    Condition  = toupper(sub("^d[0-9]+_[FM]_(wt|ko).*", "\\1", sample_names)),
+    row.names  = sample_names,
+    stringsAsFactors = FALSE
+  )
+  
+  col_Data$Condition <- factor(col_Data$Condition, levels = c("WT", "KO"))
+}
+{
   all(colnames(counts_Data) %in% rownames(col_Data))
   all(colnames(counts_Data) == rownames(col_Data))
-  
+}
+{
   dds <- DESeqDataSetFromMatrix(countData = counts_Data,
                                 colData = col_Data,
                                 design = ~ Condition)
@@ -81,20 +111,20 @@
 }
 {
   xist_data <- XIST_all_export %>%
-    select(-Gene) %>%
+    dplyr::select(-Gene) %>%
     mutate(
       Time_point = case_when(
         grepl("^d0_", Sample)      ~ 0,
         grepl("^d4_", Sample)      ~ 4,
-        grepl("^AFF3_M_", Sample)  ~ 8,
-        grepl("^AFF3_F_", Sample)  ~ 12
+        grepl("^d8_M_", Sample)    ~ 8,
+        grepl("^d8_F_", Sample)    ~ 12
       ),
       Condition = case_when(
         grepl("_ko_", Sample, ignore.case = TRUE) ~ "KO",
         grepl("_wt_", Sample, ignore.case = TRUE) ~ "WT"
       )
     ) %>%
-    select(Sample, Time_point, Condition, everything()) %>%
+    dplyr::select(Sample, Time_point, Condition, everything()) %>%
     arrange(Time_point, Condition)
   
   xist_data <- xist_data %>%
