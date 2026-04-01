@@ -48,8 +48,8 @@ scripts/
 │   ├── Fig4A_public_dataset_violin.R **(change source file format to txt, currently is csv)**
 │   ├── Fig4B_AFF3_expression_timepoint_comparison.R
 │   ├── Fig4C_4D_scRNA.ipynb **(need source file with scRNA raw QC and processing)**
-│   ├── 04_blood_trajectory.ipynb
-│   └── 05_endo_subtype.ipynb
+│   ├── Fig4F_RNA_FISH.R
+│   └── Fig4K_Heatmap **(need to clarify where the gene list in the code is coming from)**
 │
 ├── Figure-5/
 │   ├── Fig3C_3E_lineage_trace.ipynb
