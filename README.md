@@ -12,14 +12,14 @@ scripts/
 │
 ├── Figure-2/
 │   ├── source_files/
-│       ├── AFF3_F_KO_1_mm_counts_revised.txt
-│       ├── AFF3_F_KO_2_mm_counts_revised.txt
-│       ├── AFF3_F_WT_1_mm_counts_revised.txt
-│       ├── AFF3_F_WT_2_mm_counts_revised.txt
-│       ├── AFF3_M_KO_1_1_mm_counts_revised.txt
-│       ├── AFF3_M_KO_1_2_mm_counts_revised.txt
-│       ├── AFF3_M_WT_1_mm_counts_revised.txt
-│       └── AFF3_M_WT_2_mm_counts_revised.txt
+│   │   ├── AFF3_F_KO_1_mm_counts_revised.txt
+│   │   ├── AFF3_F_KO_2_mm_counts_revised.txt
+│   │   ├── AFF3_F_WT_1_mm_counts_revised.txt
+│   │   ├── AFF3_F_WT_2_mm_counts_revised.txt
+│   │   ├── AFF3_M_KO_1_1_mm_counts_revised.txt
+│   │   ├── AFF3_M_KO_1_2_mm_counts_revised.txt
+│   │   ├── AFF3_M_WT_1_mm_counts_revised.txt
+│   │   └── AFF3_M_WT_2_mm_counts_revised.txt
 │   ├── Fig2B_scatter_female.R
 │   ├── Fig2B_scatter_male.R
 │   ├── Fig2C_venn_down.R
@@ -33,18 +33,26 @@ scripts/
 │
 ├── Figure-3/
 │   ├── source_files/
-│       ├── celltype_v2_top50_markers.csv
-│       ├── d8_ko_1_1_mm_counts_revised.txt
-│       ├── d8_ko_1_2_mm_counts_revised.txt
-│       ├── d8_ko_2_1_mm_counts_revised.txt
-│       ├── d8_ko_2_2_mm_counts_revised.txt
-│       ├── d8_wt_1_mm_counts_revised.txt
-│       └── d8_wt_2_mm_counts_revised.txt
+│   │   ├── celltype_v2_top50_markers.csv
+│   │   ├── d8_ko_1_1_mm_counts_revised.txt
+│   │   ├── d8_ko_1_2_mm_counts_revised.txt
+│   │   ├── d8_ko_2_1_mm_counts_revised.txt
+│   │   ├── d8_ko_2_2_mm_counts_revised.txt
+│   │   ├── d8_wt_1_mm_counts_revised.txt
+│   │   └── d8_wt_2_mm_counts_revised.txt
 │   ├── Fig3C_3E_lineage_trace.ipynb
 │   ├── Fig3D_cluster_percentage.R
 │   └── Fig3F_fate_percentage.R
 │
 ├── Figure-4/
+│   ├── source_files/
+│   │   ├── celltype_v2_top50_markers.csv
+│   │   ├── d8_ko_1_1_mm_counts_revised.txt
+│   │   ├── d8_ko_1_2_mm_counts_revised.txt
+│   │   ├── d8_ko_2_1_mm_counts_revised.txt
+│   │   ├── d8_ko_2_2_mm_counts_revised.txt
+│   │   ├── d8_wt_1_mm_counts_revised.txt
+│   │   └── d8_wt_2_mm_counts_revised.txt
 │   ├── Fig4A_public_dataset_violin.R **(change source file format to txt, currently is csv)**
 │   ├── Fig4B_AFF3_expression_timepoint_comparison.R
 │   ├── Fig4C_4D_scRNA.ipynb **(need source file with scRNA raw QC and processing)**
