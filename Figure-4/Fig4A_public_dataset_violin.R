@@ -8,22 +8,10 @@
   library(Matrix)
   library(ggplot2)
 }
-
-## 1) Path to h5ad
-h5ad <- "~/Library/CloudStorage/OneDrive-Personal/HKU PhD/scRNA/scRNA/data/adata_no_W51.h5ad"
-
-## 2) Read h5ad -> AnnData (R-native)
-ad <- read_h5ad(h5ad)
-
-## 3) Inspect structure (safe checks)
-ad
-ad$X
-names(ad$layers)
-head(ad$obs)
-head(ad$var)
-names(ad$obsm)
-
-# helper: convert dense -> sparse if needed
+{
+  h5ad <- "~/Library/CloudStorage/OneDrive-Personal/HKU PhD/scRNA/scRNA/data/adata_no_W51.h5ad"
+  ad <- read_h5ad(h5ad)
+}
 {
   as_dgC <- function(m) {
     if (inherits(m, "dgCMatrix")) return(m)
@@ -31,18 +19,15 @@ names(ad$obsm)
     Matrix(as.matrix(m), sparse = TRUE)
   }
   
-  # 1) get cell x gene matrices from AnnData
-  X <- ad$X                      # typically cells x genes
+  X <- ad$X                      
   counts <- NULL
   if (!is.null(ad$layers) && "counts" %in% names(ad$layers)) {
-    counts <- ad$layers[["counts"]]   # typically cells x genes
+    counts <- ad$layers[["counts"]]  
   }
   
-  # 2) get gene + cell names
   genes <- rownames(ad$var)
   cells <- rownames(ad$obs)
   
-  # 3) coerce to sparse and transpose to genes x cells for Seurat
   data_mat <- t(as_dgC(X))
   colnames(data_mat) <- cells
   rownames(data_mat) <- genes
@@ -55,31 +40,11 @@ names(ad$obsm)
     obj <- CreateSeuratObject(counts = counts_mat, meta.data = as.data.frame(ad$obs))
     obj <- SetAssayData(obj, assay = "RNA", slot = "data", new.data = data_mat)
   } else {
-    # fall back: treat X as counts if no counts layer exists
     obj <- CreateSeuratObject(counts = data_mat, meta.data = as.data.frame(ad$obs))
   }
   
   obj
 }
-
-
-VlnPlot(
-  obj,
-  features = "nFeature_RNA",
-  group.by = "week_stage",
-  pt.size = 0
-)
-
-## Same as jupyter plot
-VlnPlot(
-  obj,
-  features = "XIST",
-  group.by = "week_stage",
-  slot = "counts",
-  pt.size = 0
-)
-
-## Modified
 {
   p <- VlnPlot(
     obj,
@@ -110,7 +75,6 @@ VlnPlot(
   
   p
 }
-
 
 ggsave(
   filename = "~/Library/CloudStorage/OneDrive-Personal/HKU PhD/Figure 4 new/violin/Fig4A_violin.svg",
