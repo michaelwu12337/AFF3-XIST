@@ -105,7 +105,7 @@ Figure-4/source_files/
 ```text
 Figure-5/
 ├── Fig5C_5F_brain_organoid_UMAP.R
-├── Fig5D_neural_lineage_percent.R
+├── Fig5D_neural_lineage_percent.R (need code to show how to get the percentage, can be either R or python, may be incorporated in previous Fig5C_5F code)
 ├── 03_annotation.ipynb
 ├── 04_blood_trajectory.ipynb
 └── 05_endo_subtype.ipynb
