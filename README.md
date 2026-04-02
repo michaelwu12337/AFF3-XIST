@@ -74,7 +74,6 @@ Figure-3/source_files/
 
 ```text
 Figure-4/
-Figure-4/
 ├── Fig4A_public_dataset_violin.R
 ├── Fig4B_AFF3_expression_timepoint_comparison.R 
 ├── Fig4C_4D_scRNA.ipynb (need source file with scRNA raw QC and processing)
