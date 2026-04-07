@@ -187,13 +187,70 @@
     toupper() %>%
     unique()
 }
+{
+  # get chromosome info for genes in set_binding
+  mart <- useEnsembl(biomart = "genes", dataset = "hsapiens_gene_ensembl")
+  
+  binding_chr <- getBM(
+    attributes = c(
+      "hgnc_symbol",
+      "chromosome_name",
+      "start_position",
+      "end_position",
+      "strand"
+    ),
+    filters = "hgnc_symbol",
+    values = unique(set_binding),
+    mart = mart
+  ) %>%
+    filter(hgnc_symbol != "") %>%
+    distinct(hgnc_symbol, .keep_all = TRUE)
+  
+  # make names consistent with your set_binding
+  binding_chr <- binding_chr %>%
+    mutate(
+      hgnc_symbol = toupper(trimws(hgnc_symbol))
+    )
+  
+  # join back to full set_binding list to see mapped / unmapped genes
+  binding_chr_full <- tibble(gene_symbol_final = unique(set_binding)) %>%
+    left_join(binding_chr, by = c("gene_symbol_final" = "hgnc_symbol"))
+  
+  # quick checks
+  head(binding_chr_full)
+  table(is.na(binding_chr_full$chromosome_name))
+}
+{
+  set_binding_autosome <- binding_chr_full %>%
+    filter(
+      !chromosome_name %in% c("X", "Y"),
+      gene_symbol_final != "CETN2"
+    ) %>%
+    pull(gene_symbol_final) %>%
+    unique()
+  
+  # quick checks
+  length(set_binding)
+  length(set_binding_autosome)
+  
+  removed_genes <- set_binding[set_binding %in% c(
+    binding_chr_full %>%
+      filter(chromosome_name %in% c("X", "Y")) %>%
+      pull(gene_symbol_final),
+    "CETN2"
+  )] %>%
+    unique() %>%
+    sort()
+  
+  removed_genes
+}
 
 
 # Venn plot ---------------------------------------------------------------
 venn_plot_xist_binding <- venn.diagram(
   x = list(
     XIST_binding = set_xist,
-    genes_binding = set_binding
+    genes_binding = set_binding_autosome
   ),
   category.names = c("XIST binding", "Genes binding"),
   filename = NULL,
@@ -209,7 +266,7 @@ venn_plot_xist_binding <- venn.diagram(
 
 # Save SVG
 {
-  svglite("fig5_venn_XISTbinding_vs_genesbinding.svg", 
+  svglite("fig5_venn_XISTbinding_vs_genesbinding_edit.svg", 
           bg = "transparent", 
           width = 8, height = 6)
   grid.newpage()
@@ -235,7 +292,7 @@ venn_plot_xist_binding <- venn.diagram(
   )
 }
 
-write.csv(venn_genes, "fig5_venn_XISTbinding_vs_genesbinding.csv", row.names = FALSE)
+write.csv(venn_genes, "fig5_venn_XISTbinding_vs_genesbinding_edit.csv", row.names = FALSE)
 
 
 # GO ----------------------------------------------------------------------
