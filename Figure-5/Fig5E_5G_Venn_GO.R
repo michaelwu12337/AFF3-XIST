@@ -206,7 +206,7 @@
     filter(hgnc_symbol != "") %>%
     distinct(hgnc_symbol, .keep_all = TRUE)
   
-  # make names consistent with your set_binding
+  # make names consistent 
   binding_chr <- binding_chr %>%
     mutate(
       hgnc_symbol = toupper(trimws(hgnc_symbol))
