@@ -197,11 +197,37 @@ DimPlot(
   ) +
   labs(x = NULL, y = NULL, title = NULL)
 
+DimPlot(
+  integrated_labelv3,
+  group.by = "cell_type",
+  reduction = "umap",
+  pt.size = point_size,
+  label = FALSE
+) +
+  scale_color_manual(
+    values = cluster_colors,
+    labels = function(x) str_wrap(str_replace_all(x, "_", " "), width = 25)
+  ) +
+  theme_classic() +
+  theme(
+    panel.border = element_blank(),   # remove outer border
+    axis.line = element_blank(),      # remove axis lines
+    axis.ticks = element_blank(),     # remove ticks
+    axis.text = element_blank(),      # remove tick labels
+    axis.title = element_blank(),     # remove axis titles
+    
+    legend.position = "none",
+    
+    plot.title = element_blank(),
+    plot.margin = margin(15, 15, 15, 15)
+  ) +
+  labs(x = NULL, y = NULL, title = NULL)
+
 ggsave(
-  "fig5_UMAP_07.tiff",
+  "fig5_UMAP_no_border_08.tiff",
   plot = last_plot(),
   width = 9,    
-  height = 9,      
+  height = 8,      
   units = "in",
   dpi = 600,
   limitsize = FALSE,
@@ -329,3 +355,40 @@ ggsave(
   
   p_combined
 }
+{
+  # Remove borders, axes, ticks for all three
+  clean_theme <- theme(
+    panel.border = element_blank(),
+    axis.line    = element_blank(),
+    axis.ticks   = element_blank(),
+    axis.text    = element_blank(),
+    axis.title   = element_blank(),
+    legend.position = "none",
+    plot.title      = element_blank(),
+    
+    panel.background = element_rect(fill = "#F7F7F7", color = NA),
+    plot.background  = element_rect(fill = "#F7F7F7", color = NA),
+    legend.background  = element_rect(fill = "#F7F7F7", color = NA)
+  )
+  
+  p_WT  <- p_WT  + clean_theme
+  p_KO  <- p_KO  + clean_theme
+  p_DKO <- p_DKO + clean_theme
+  
+  p_combined <- (p_WT | p_KO | p_DKO)
+}
+
+ggsave(
+  "SFRP2_WT_lab_grey.tiff",
+  plot = p_WT,
+  width = 3,
+  height = 2.5,
+  units = "in",
+  dpi = 600,
+  compression = "lzw"
+)
+
+
+
+
+
