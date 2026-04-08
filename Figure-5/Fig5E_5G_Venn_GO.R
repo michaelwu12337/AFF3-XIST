@@ -206,7 +206,7 @@
     filter(hgnc_symbol != "") %>%
     distinct(hgnc_symbol, .keep_all = TRUE)
   
-  # make names consistent 
+  # make names consistent with your set_binding
   binding_chr <- binding_chr %>%
     mutate(
       hgnc_symbol = toupper(trimws(hgnc_symbol))
@@ -266,7 +266,7 @@ venn_plot_xist_binding <- venn.diagram(
 
 # Save SVG
 {
-  svglite("fig5_venn_XISTbinding_vs_genesbinding_edit.svg", 
+  svglite("fig5_venn_XISTbinding_vs_genesbinding_edit_01.svg", 
           bg = "transparent", 
           width = 8, height = 6)
   grid.newpage()
@@ -279,9 +279,9 @@ venn_plot_xist_binding <- venn.diagram(
 
 # Save the gene lists behind the Venn
 {
-  XIST_only <- setdiff(set_xist, set_binding)
-  binding_only <- setdiff(set_binding, set_xist)
-  XIST_and_binding <- intersect(set_xist, set_binding)
+  XIST_only <- setdiff(set_xist, set_binding_autosome)
+  binding_only <- setdiff(set_binding_autosome, set_xist)
+  XIST_and_binding <- intersect(set_xist, set_binding_autosome)
   
   max_len <- max(length(XIST_only), length(binding_only), length(XIST_and_binding))
   
@@ -363,7 +363,7 @@ ggplot(
   
   GO_overlap_df_sel <- GO_overlap_df %>%
     filter(stringr::str_detect(Description_raw, paste(patterns_keep, collapse = "|"))) %>%
-    mutate(Description = stringr::str_wrap(Description_raw, width = 30))   # wrap AFTER filtering
+    mutate(Description = stringr::str_wrap(Description_raw, width = 40))   # wrap AFTER filtering
 }
 
 ggplot(
@@ -377,25 +377,28 @@ ggplot(
   geom_col(color = "black") +
   labs(x = "-log10 (p-value)", y = NULL, fill = "log2 (O/E)") +
   scale_fill_gradient(
-    low = "#EFE6D8",
-    high = "#D55E00", 
+    low  = "#E6EDF2",   # very light blue-grey
+    high = "#4C6A92",   # muted slate blue
     labels = scales::number_format(accuracy = 0.1),
     guide = guide_colorbar(frame.colour = "black", ticks.colour = "black")
   ) +
   theme_classic() +
   theme(
     axis.line = element_line(linewidth = 1.4, colour = "black"),
-    axis.text.y = element_text(size = 24, face = "bold"),
-    axis.title.x = element_text(size = 28, face = "bold"),
-    axis.text.x = element_text(size = 18),
-    legend.title = element_text(size = 24),
-    legend.text = element_text(size = 24)
+    axis.text.y = element_text(size = 30, face = "bold"),
+    axis.title.x = element_text(size = 30, face = "bold"),
+    axis.text.x = element_text(size = 30),
+    legend.title = element_text(size = 30),
+    legend.text = element_text(size = 30),
+    
+    legend.key.height = unit(1, "cm"),
+    legend.key.width  = unit(0.8, "cm") 
   )
 
 ggsave(
-  "fig5_BrainOrganoid_vs_Public_GO_3.tiff",
+  "fig5_BrainOrganoid_vs_Public_GO_5.tiff",
   plot = last_plot(),
-  width = 10,    
+  width = 15,    
   height = 5,      
   units = "in",
   dpi = 600,
