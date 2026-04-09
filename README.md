@@ -1,6 +1,5 @@
 # Code for AFF3 paper
 
-```text
 Brain development spans the human lifespan, but the molecular control of the
 earliest neural lineage remains poorly defined. Mutations in the super
 elongation complex factor AFF3 cause KINSSHIP syndrome, a predominantly
@@ -15,7 +14,6 @@ Pharmacogenetic attenuation of XIST restores neural lineage in KINSSHIP-
 associated AFF3 variants. These findings identify AFF3 as a safeguard of early
 neural lineage specification and reveal XIST dysregulation as a targetable axis in
 sex-biased neurodevelopmental disorders.
-```
 
 
 ### Download link for processed files
