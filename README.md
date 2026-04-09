@@ -105,9 +105,7 @@ Figure-4/source_files/
 Figure-5/
 ├── Fig5C_5F_brain_organoid_UMAP.R
 ├── Fig5D_neural_lineage_percent.R (need code to show how to get the percentage, can be either R or python, may be incorporated in previous Fig5C_5F code)
-├── Fig5E_5G_Venn_GO.R (need to show how to get the gene list)
-├── 04_blood_trajectory.ipynb
-└── 05_endo_subtype.ipynb
+└── Fig5E_5G_Venn_GO.R (need to show how to get the gene list)
 ```
 
 <details>
