@@ -1,5 +1,23 @@
 # Code for AFF3 paper
 
+```text
+Brain development spans the human lifespan, but the molecular control of the
+earliest neural lineage remains poorly defined. Mutations in the super
+elongation complex factor AFF3 cause KINSSHIP syndrome, a predominantly
+female neurodevelopmental disorder, implicating sex-specific regulation of
+early neural fate. Using human stem cell embryo models, we find that AFF3 is
+enriched in neuroectoderm and is required for neural lineage specification in
+female, but not male embryos. Mechanistically, AFF3 prevents premature
+upregulation of the X-inactivation mediator XIST during neural specification in
+both embryo models and cerebral organoids. Loss of AFF3 leads to excessive
+XIST expression and ectopic repression of autosomal neural programs.
+Pharmacogenetic attenuation of XIST restores neural lineage in KINSSHIP-
+associated AFF3 variants. These findings identify AFF3 as a safeguard of early
+neural lineage specification and reveal XIST dysregulation as a targetable axis in
+sex-biased neurodevelopmental disorders.
+```
+
+
 ### Download link for processed files
 
 ```text
