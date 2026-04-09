@@ -1,4 +1,4 @@
-# Code for AFF3 paper
+# AFF3 safeguards female neural lineage specification by restraining XIST
 
 Brain development spans the human lifespan, but the molecular control of the
 earliest neural lineage remains poorly defined. Mutations in the super
