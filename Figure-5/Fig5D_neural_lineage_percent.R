@@ -20,8 +20,8 @@ shape_map <- c(WT = 15, KO = 17, DKO = 19)
 ggplot(df, aes(x = group, y = pct, fill = group)) +
   geom_col(
     width = 0.55,
-    color = "black",     # outline color
-    linewidth = 1.       # outline thickness
+    color = "black",
+    linewidth = 1        
   ) +
   geom_point(aes(shape = group), size = 4.2, color = "black") +
   geom_text(
@@ -56,10 +56,10 @@ ggplot(df, aes(x = group, y = pct, fill = group)) +
   coord_flip()
 
 ggsave(
-  "fig5_bar_flat_02.tiff",
+  "fig5_bar_flat_03.tiff",
   plot = last_plot(),
   width = 6.5,    
-  height = 3,      
+  height = 2,      
   units = "in",
   dpi = 600,
   limitsize = FALSE,
