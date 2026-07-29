@@ -1,123 +1,61 @@
 # AFF3 safeguards female neural lineage specification by restraining XIST
 
-Brain development spans the human lifespan, but the molecular control of the earliest neural lineage remains poorly defined. Mutations in the super elongation complex factor AFF3 cause KINSSHIP syndrome, a predominantly female neurodevelopmental disorder, implicating sex-specific regulation of early neural fate. Using human stem cell embryo models, we find that AFF3 is enriched in neuroectoderm and is required for neural lineage specification in female, but not male embryos. Mechanistically, AFF3 prevents premature upregulation of the X-inactivation mediator XIST during neural specification in both embryo models and cerebral organoids. Loss of AFF3 leads to excessive XIST expression and ectopic repression of autosomal neural programs. Pharmacogenetic attenuation of XIST restores neural lineage in KINSSHIP- associated AFF3 variants. These findings identify AFF3 as a safeguard of early neural lineage specification and reveal XIST dysregulation as a targetable axis in sex-biased neurodevelopmental disorders.
+Brain development spans the human lifespan, but the molecular control of the earliest neural lineage remains poorly defined. Mutations in the super elongation complex factor AFF3 cause KINSSHIP syndrome, a predominantly female neurodevelopmental disorder, implicating sex-specific regulation of early neural fate. Using human stem cell embryo models, we find that AFF3 is enriched in neuroectoderm and is required for neural lineage specification in female, but not male embryos. Mechanistically, AFF3 prevents premature upregulation of the X-inactivation mediator XIST during neural specification in both embryo models and cerebral organoids. Loss of AFF3 leads to excessive XIST expression and ectopic repression of autosomal neural programs. Pharmacogenetic attenuation of XIST restores neural lineage in KINSSHIP-associated AFF3 variants. These findings identify AFF3 as a safeguard of early neural lineage specification and reveal XIST dysregulation as a targetable axis in sex-biased neurodevelopmental disorders.
 
+## Repository contents
 
-### Download link for processed files
+This repository contains the analysis and plotting code used for manuscript Figures 2–6. Each script or notebook should be run from its corresponding `Figure-X` directory.
 
-```text
-goes here
+- `source_files/` contains the small input tables committed with the repository.
+- `generated_tables/` contains analysis-derived tables retained for traceability.
+- Scripts create `generated_figures/` when they are run; generated figure files are not committed.
+- Some final text labels and graphical annotations were added during figure assembly and are not produced by the scripts.
+
+| Figure panel | Script or notebook |
+| --- | --- |
+| 2C | `Figure-2/Fig2C_RNAseq_scatter.R` |
+| 2D | `Figure-2/Fig2D_neural_heatmap.R` |
+| 2F–G | `Figure-2/Fig2F_2G_scRNA_lineage_tracking.ipynb` |
+| 3B | `Figure-3/Fig3B_XIST_public_dataset_violin.R` |
+| 3C | `Figure-3/Fig3C_XIST_timepoint_comparison.R` |
+| 3D | `Figure-3/Fig3D_XIST_UMAP.ipynb` |
+| 3F | `Figure-3/Fig3F_RNA_FISH_quantification.R` |
+| 4G | `Figure-4/Fig4G_shared_rescue_gene_heatmaps.R` |
+| 4H | `Figure-4/Fig4H_shared_rescue_gene_GO.R` |
+| 5C–D | `Figure-5/Fig5C_5D_brain_organoid_UMAP.R` |
+| 5E–F | `Figure-5/Fig5E_5F_Venn_GO.R` |
+| 6A | `Figure-6/Fig6A_clinical_heatmap.R` |
+| 6B | `Figure-6/Fig6B_sex_dumbbell.R` |
+
+## Large processed files
+
+The following processed objects are too large for this GitHub repository and will be provided through the associated data archive. Place each downloaded file in the indicated directory without renaming it.
+
+| Required file | Destination | Used for |
+| --- | --- | --- |
+| `adata_combined.h5ad` | `Figure-2/source_files/` | Figure 2F–G |
+| `adata_no_W51.h5ad` | `Figure-3/source_files/` | Figure 3B |
+| `adata_combined.h5ad` | `Figure-3/source_files/` | Figure 3D |
+| `AFF3_integrated_final_v3.rds` | `Figure-5/source_files/` | Figure 5C–D |
+
+The permanent archive link will be added here when the dataset is deposited.
+
+## Running the analyses
+
+Run R scripts from the corresponding figure directory. For example:
+
+```bash
+cd Figure-6
+Rscript Fig6A_clinical_heatmap.R
 ```
 
-### Analysis script structure
+Launch Jupyter from the relevant figure directory before running a notebook so its relative `source_files/` paths resolve correctly.
 
-## Figure-2
+The scripts use standard CRAN and Bioconductor packages, including DESeq2, Seurat, anndataR, tidyverse, ggplot2, ggrepel, pheatmap, clusterProfiler, org.Hs.eg.db, VennDiagram, ggpubr, rstatix, ggbreak, ggnewscale, and svglite. The notebooks use Python with Scanpy, NumPy, and Matplotlib.
 
-```text
-Figure-2/
-├── Fig2B_scatter_female.R
-├── Fig2B_scatter_male.R
-├── Fig2C_venn_down.R
-├── Fig2C_venn_up.R
-├── Fig2D_GO_female.R
-├── Fig2D_GO_male.R
-├── Fig2E_heatmap_cardiac.R
-├── Fig2E_heatmap_germlayer.R
-├── Fig2E_heatmap_hematopoiesis.R
-└── Fig2E_heatmap_neural.R
-```
+## Analysis flow
 
-<details>
-<summary><strong>source_files</strong></summary>
-
-```text
-Figure-2/source_files/
-├── AFF3_F_KO_1_mm_counts_revised.txt
-├── AFF3_F_KO_2_mm_counts_revised.txt
-├── AFF3_F_WT_1_mm_counts_revised.txt
-├── AFF3_F_WT_2_mm_counts_revised.txt
-├── AFF3_M_KO_1_1_mm_counts_revised.txt
-├── AFF3_M_KO_1_2_mm_counts_revised.txt
-├── AFF3_M_WT_1_mm_counts_revised.txt
-└── AFF3_M_WT_2_mm_counts_revised.txt
-```
-
-</details>
-
----
-
-## Figure-3
-
-```text
-Figure-3/
-├── Fig3C_3E_lineage_trace.ipynb
-├── Fig3D_cluster_percentage.R
-└── Fig3F_fate_percentage.R
-```
-
-<details>
-<summary><strong>source_files</strong></summary>
-
-```text
-Figure-3/source_files/
-├── celltype_v2_top50_markers.csv
-├── d8_ko_1_1_mm_counts_revised.txt
-├── d8_ko_1_2_mm_counts_revised.txt
-├── d8_ko_2_1_mm_counts_revised.txt
-├── d8_ko_2_2_mm_counts_revised.txt
-├── d8_wt_1_mm_counts_revised.txt
-└── d8_wt_2_mm_counts_revised.txt
-```
-
-</details>
-
----
-
-## Figure-4
-
-```text
-Figure-4/
-├── Fig4A_public_dataset_violin.R
-├── Fig4B_AFF3_expression_timepoint_comparison.R 
-├── Fig4C_4D_scRNA.ipynb (need source file with scRNA raw QC and processing)
-├── Fig4F_RNA_FISH.R (need file or code to show how to get intensity data)
-├── Fig4K_heatmap.R (need to clarify where the gene list in the code is coming from)
-└── Fig4L_GO.R (need to clarify where the gene_list and gene_list_GO object come from)
-```
-
-<details>
-<summary><strong>source_files</strong></summary>
-
-```text
-Figure-4/source_files/
-├── AFF3_F_KO_1_mm_counts_revised.txt
-├── AFF3_F_KO_2_mm_counts_revised.txt
-├── AFF3_F_KO_Xt_KO_A3_1_mm_counts_revised.txt
-├── AFF3_F_KO_Xt_KO_A3_2_mm_counts_revised.txt
-├── AFF3_F_WT_1_mm_counts_revised.txt
-└── AFF3_F_WT_2_mm_counts_revised.txt
-```
-
-</details>
-
----
-
-## Figure-5
-
-```text
-Figure-5/
-├── Fig5C_5F_brain_organoid_UMAP.R
-├── Fig5D_neural_lineage_percent.R (need code to show how to get the percentage, can be either R or python, may be incorporated in previous Fig5C_5F code)
-└── Fig5E_5G_Venn_GO.R (need to show how to get the gene list)
-```
-
-<details>
-<summary><strong>source_files</strong></summary>
-
-```text
-Figure-5/source_files/
-```
-
-</details>
-
----
+- Figure 4G starts from the included count tables and writes rescued-gene lists and heatmap matrices to `Figure-4/generated_tables/`.
+- Figure 4H uses the shared rescued XIST-binding genes generated by Figure 4G.
+- Figure 5E–F records its Venn and GO result tables in `Figure-5/generated_tables/`.
+- Figure 6A and 6B read the exact clinical classifications and plotted summary values from their committed CSV source tables.

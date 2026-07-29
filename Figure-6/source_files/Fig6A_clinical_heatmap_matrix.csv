@@ -1,0 +1,15 @@
+Patient,Sex,Zygosity,DD_severe,ACC_severe,DD_moderate,ACC_moderate,DD_mild,ACC_mild,IUGR_present,IUGR_absent
+L12,F,Hom LoF/LoF,1,,0,,0,,1,0
+L6,F,Het LoF/+,0,1,1,0,0,0,1,0
+L7,F,Het LoF/+,0,,1,,0,,0,1
+L14,F,Het LoF/+,0,0,0,0,1,0,0,1
+L5,M,Deletion,,0,,1,,0,0,1
+L2,M,Het LoF/+,0,0,1,0,0,1,,
+L3,M,Het LoF/+,0,0,1,0,0,1,0,1
+L1,M,Het LoF/+,0,0,1,0,0,0,0,1
+L8,M,Deletion,0,0,0,0,1,0,1,0
+L13,M,Hom LoF/LoF,0,,0,,1,,1,0
+L10,M,Compound LoF/missense,0,0,0,0,1,0,0,1
+L4,M,Het LoF/+,0,,0,,1,,,
+L9,M,Het LoF/+,0,,0,,1,,,
+L11,M,Hom LoF/LoF,,,,,,,,

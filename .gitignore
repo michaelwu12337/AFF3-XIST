@@ -1,0 +1,8 @@
+.DS_Store
+.Rhistory
+.ipynb_checkpoints/
+__pycache__/
+
+**/generated_figures/
+**/source_files/*.h5ad
+**/source_files/*.rds
