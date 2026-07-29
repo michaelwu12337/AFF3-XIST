@@ -1,6 +1,6 @@
 # AFF3 safeguards female neural lineage specification by restraining XIST
 
-Brain development spans the human lifespan, but the molecular control of the earliest neural lineage remains poorly defined. Mutations in the super elongation complex factor AFF3 cause KINSSHIP syndrome, a predominantly female neurodevelopmental disorder, implicating sex-specific regulation of early neural fate. Using human stem cell embryo models, we find that AFF3 is enriched in neuroectoderm and is required for neural lineage specification in female, but not male embryos. Mechanistically, AFF3 prevents premature upregulation of the X-inactivation mediator XIST during neural specification in both embryo models and cerebral organoids. Loss of AFF3 leads to excessive XIST expression and ectopic repression of autosomal neural programs. Pharmacogenetic attenuation of XIST restores neural lineage in KINSSHIP- associated AFF3 variants. These findings identify AFF3 as a safeguard of early neural lineage specification and reveal XIST dysregulation as a targetable axis in sex-biased neurodevelopmental disorders.
+The earliest neural lineage develops under sex-specific dosage-compensation machinery, yet how this shapes neural fate remains poorly defined. Mutations in the super-elongation complex factor AFF3 cause neurodevelopmental disease, but only loss-of-function variants show a female bias, whereas dominant-negative variants affect both sexes. Using human stem cell-based embryo models to dissect this vulnerability, we find that AFF3 is enriched in neuroectoderm and is required for neural lineage specification in females, but not in males. Mechanistically, AFF3 prevents premature upregulation of the X-inactivation mediator XIST during neural specification in both gastruloids and cerebral organoids. Loss of AFF3 leads to excessive XIST expression that represses autosomal neural programs. Pharmacogenetic attenuation of XIST restores neural specification in AFF3 loss-of-function models. These findings establish AFF3 as a safeguard of early female neural development, highlighting its role in temporally restraining XIST to permit neural lineage specification, with AFF3 loss driving sex-biased neurodevelopmental disease.
 
 
 ### Download link for processed files
@@ -15,16 +15,9 @@ goes here
 
 ```text
 Figure-2/
-├── Fig2B_scatter_female.R
-├── Fig2B_scatter_male.R
-├── Fig2C_venn_down.R
-├── Fig2C_venn_up.R
-├── Fig2D_GO_female.R
-├── Fig2D_GO_male.R
-├── Fig2E_heatmap_cardiac.R
-├── Fig2E_heatmap_germlayer.R
-├── Fig2E_heatmap_hematopoiesis.R
-└── Fig2E_heatmap_neural.R
+├── Fig2C_RNAseq_scatter.R
+├── Fig2D_neural_heatmap.R
+└── Fig2F_2G_scRNA_lineage_tracking.ipynb
 ```
 
 <details>
@@ -39,7 +32,8 @@ Figure-2/source_files/
 ├── AFF3_M_KO_1_1_mm_counts_revised.txt
 ├── AFF3_M_KO_1_2_mm_counts_revised.txt
 ├── AFF3_M_WT_1_mm_counts_revised.txt
-└── AFF3_M_WT_2_mm_counts_revised.txt
+├── AFF3_M_WT_2_mm_counts_revised.txt
+└── adata_combined.h5ad
 ```
 
 </details>
@@ -50,9 +44,10 @@ Figure-2/source_files/
 
 ```text
 Figure-3/
-├── Fig3C_3E_lineage_trace.ipynb
-├── Fig3D_cluster_percentage.R
-└── Fig3F_fate_percentage.R
+├── Fig3B_XIST_public_dataset_violin.R
+├── Fig3C_XIST_timepoint_comparison.R
+├── Fig3D_XIST_UMAP.ipynb
+└── Fig3F_RNA_FISH_quantification.R
 ```
 
 <details>
@@ -60,13 +55,26 @@ Figure-3/
 
 ```text
 Figure-3/source_files/
-├── celltype_v2_top50_markers.csv
-├── d8_ko_1_1_mm_counts_revised.txt
-├── d8_ko_1_2_mm_counts_revised.txt
-├── d8_ko_2_1_mm_counts_revised.txt
-├── d8_ko_2_2_mm_counts_revised.txt
-├── d8_wt_1_mm_counts_revised.txt
-└── d8_wt_2_mm_counts_revised.txt
+├── AFF3_F_KO_1_mm_counts_revised.txt
+├── AFF3_F_KO_2_mm_counts_revised.txt
+├── AFF3_F_WT_1_mm_counts_revised.txt
+├── AFF3_F_WT_2_mm_counts_revised.txt
+├── AFF3_M_KO_1_1_mm_counts_revised.txt
+├── AFF3_M_KO_1_2_mm_counts_revised.txt
+├── AFF3_M_WT_1_mm_counts_revised.txt
+├── AFF3_M_WT_2_mm_counts_revised.txt
+├── Fig3F_RNA_FISH_cell_percentages.csv
+├── Fig3F_RNA_FISH_intensity.csv
+├── adata_combined.h5ad
+├── adata_no_W51.h5ad
+├── d0_F_ko_1_1_mm_counts_revised.txt
+├── d0_F_ko_1_2_mm_counts_revised.txt
+├── d0_F_wt_1_mm_counts_revised.txt
+├── d0_F_wt_2_mm_counts_revised.txt
+├── d4_F_ko_1_1_mm_counts_revised.txt
+├── d4_F_ko_1_2_mm_counts_revised.txt
+├── d4_F_wt_1_mm_counts_revised.txt
+└── d4_F_wt_2_mm_counts_revised.txt
 ```
 
 </details>
@@ -77,12 +85,8 @@ Figure-3/source_files/
 
 ```text
 Figure-4/
-├── Fig4A_public_dataset_violin.R
-├── Fig4B_AFF3_expression_timepoint_comparison.R 
-├── Fig4C_4D_scRNA.ipynb (need source file with scRNA raw QC and processing)
-├── Fig4F_RNA_FISH.R (need file or code to show how to get intensity data)
-├── Fig4K_heatmap.R (need to clarify where the gene list in the code is coming from)
-└── Fig4L_GO.R (need to clarify where the gene_list and gene_list_GO object come from)
+├── Fig4G_shared_rescue_gene_heatmaps.R
+└── Fig4H_shared_rescue_gene_GO.R
 ```
 
 <details>
@@ -95,7 +99,14 @@ Figure-4/source_files/
 ├── AFF3_F_KO_Xt_KO_A3_1_mm_counts_revised.txt
 ├── AFF3_F_KO_Xt_KO_A3_2_mm_counts_revised.txt
 ├── AFF3_F_WT_1_mm_counts_revised.txt
-└── AFF3_F_WT_2_mm_counts_revised.txt
+├── AFF3_F_WT_2_mm_counts_revised.txt
+├── KOX1_1_mm_counts_revised.txt
+├── KOX1_2_mm_counts_revised.txt
+├── KO_1_mm_counts_revised.txt
+├── KO_2_mm_counts_revised.txt
+├── WT_1_mm_counts_revised.txt
+├── WT_2_mm_counts_revised.txt
+└── XIST_binding_933_genes.csv
 ```
 
 </details>
@@ -106,9 +117,8 @@ Figure-4/source_files/
 
 ```text
 Figure-5/
-├── Fig5C_5F_brain_organoid_UMAP.R
-├── Fig5D_neural_lineage_percent.R (need code to show how to get the percentage, can be either R or python, may be incorporated in previous Fig5C_5F code)
-└── Fig5E_5G_Venn_GO.R (need to show how to get the gene list)
+├── Fig5C_5D_brain_organoid_UMAP.R
+└── Fig5E_5F_Venn_GO.R
 ```
 
 <details>
@@ -116,6 +126,94 @@ Figure-5/
 
 ```text
 Figure-5/source_files/
+├── AFF3_integrated_final_v3.rds
+├── BO_DKO_rescued_genes_1599.csv
+└── XIST_binding_933_genes.csv
+```
+
+</details>
+
+---
+
+## Figure-6
+
+```text
+Figure-6/
+├── Fig6A_clinical_heatmap.R
+└── Fig6B_sex_dumbbell.R
+```
+
+<details>
+<summary><strong>source_files</strong></summary>
+
+```text
+Figure-6/source_files/
+├── Fig6A_clinical_heatmap_matrix.csv
+└── Fig6B_sex_dumbbell_summary.csv
+```
+
+</details>
+
+---
+
+## Supplementary Figure
+
+```text
+Supplementary Figure/
+├── Supp-Figure-4/
+│   └── SuppFig4B_X_linked_heatmaps.R
+├── Supp-Figure-5/
+│   └── SuppFig5_individual_gene_UMAPs.R
+├── Supp-Figure-6/
+│   └── SuppFig6_individual_gene_UMAPs.R
+├── Supp-Figure-7/
+│   └── SuppFig7_imprinted_gene_UMAPs.R
+├── Supp-Figure-8/
+│   └── SuppFig8C_8D_8E_AFF3_DN_bulk_RNAseq.R
+└── Supp-Figure-9/
+    ├── SuppFig9A_RNAseq_scatterplots.R
+    ├── SuppFig9B_lineage_heatmaps.R
+    └── SuppFig9C_9D_rescue_analysis.R
+```
+
+<details>
+<summary><strong>source_files</strong></summary>
+
+```text
+Supplementary Figure/
+├── Supp-Figure-4/source_files/
+│   ├── AFF3_F_KO_1_mm_counts_revised.txt
+│   ├── AFF3_F_KO_2_mm_counts_revised.txt
+│   ├── AFF3_F_WT_1_mm_counts_revised.txt
+│   ├── AFF3_F_WT_2_mm_counts_revised.txt
+│   ├── AFF3_M_KO_1_1_mm_counts_revised.txt
+│   ├── AFF3_M_KO_1_2_mm_counts_revised.txt
+│   ├── AFF3_M_WT_1_mm_counts_revised.txt
+│   ├── AFF3_M_WT_2_mm_counts_revised.txt
+│   └── X_linked_HGNC_genes_Ensembl115.csv
+├── Supp-Figure-8/source_files/
+│   ├── D1_1_mm_counts_revised.txt
+│   ├── D1_2_mm_counts_revised.txt
+│   ├── D2_1_mm_counts_revised.txt
+│   ├── D2_2_mm_counts_revised.txt
+│   ├── D3_1_mm_counts_revised.txt
+│   └── D3_2_mm_counts_revised.txt
+└── Supp-Figure-9/source_files/
+    ├── AFF3_F_KO_1_mm_counts_revised.txt
+    ├── AFF3_F_KO_2_mm_counts_revised.txt
+    ├── AFF3_F_KO_Xt_KO_A3_1_mm_counts_revised.txt
+    ├── AFF3_F_KO_Xt_KO_A3_2_mm_counts_revised.txt
+    ├── AFF3_F_WT_1_mm_counts_revised.txt
+    ├── AFF3_F_WT_2_mm_counts_revised.txt
+    ├── KOX1_1_mm_counts_revised.txt
+    ├── KOX1_2_mm_counts_revised.txt
+    ├── KO_1_mm_counts_revised.txt
+    ├── KO_2_mm_counts_revised.txt
+    ├── WT+X1_1_mm_counts_revised.txt
+    ├── WT+X1_2_mm_counts_revised.txt
+    ├── WT_1_mm_counts_revised.txt
+    ├── WT_2_mm_counts_revised.txt
+    └── XIST_binding_933_genes.csv
 ```
 
 </details>
