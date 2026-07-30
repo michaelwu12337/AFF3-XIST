@@ -12,11 +12,9 @@
 # Input and output directories -------------------------------------------
 {
   source_dir <- "source_files"
-  table_dir <- "generated_tables"
   fig5e_dir <- file.path("generated_figures", "Fig5E")
   fig5f_dir <- file.path("generated_figures", "Fig5F")
 
-  dir.create(table_dir, recursive = TRUE, showWarnings = FALSE)
   dir.create(fig5e_dir, recursive = TRUE, showWarnings = FALSE)
   dir.create(fig5f_dir, recursive = TRUE, showWarnings = FALSE)
 }
@@ -89,44 +87,7 @@
   popViewport()
   dev.off()
 
-  XIST_only <- setdiff(set_xist, set_dko)
-  DKO_only <- setdiff(set_dko, set_xist)
   overlap <- intersect(set_xist, set_dko)
-
-  max_len <- max(length(XIST_only), length(DKO_only), length(overlap))
-  venn_genes <- data.frame(
-    XIST_only = c(XIST_only, rep(NA, max_len - length(XIST_only))),
-    DKO_only = c(DKO_only, rep(NA, max_len - length(DKO_only))),
-    overlap = c(overlap, rep(NA, max_len - length(overlap)))
-  )
-
-  venn_summary <- data.frame(
-    gene_set = c(
-      "Autosomal XIST targets",
-      "DKO rescued genes",
-      "Shared genes",
-      "XIST targets only",
-      "DKO rescued only"
-    ),
-    gene_count = c(
-      length(set_xist),
-      length(set_dko),
-      length(overlap),
-      length(XIST_only),
-      length(DKO_only)
-    )
-  )
-
-  write.csv(
-    venn_genes,
-    file.path(table_dir, "Fig5E_Venn_gene_sets.csv"),
-    row.names = FALSE
-  )
-  write.csv(
-    venn_summary,
-    file.path(table_dir, "Fig5E_Venn_summary.csv"),
-    row.names = FALSE
-  )
 }
 
 # Figure 5F: GO analysis of the 44 overlapping genes ---------------------
@@ -215,16 +176,5 @@
     dpi = 600,
     limitsize = FALSE,
     compression = "lzw"
-  )
-
-  write.csv(
-    GO_overlap_df,
-    file.path(table_dir, "Fig5F_GO_all_terms.csv"),
-    row.names = FALSE
-  )
-  write.csv(
-    GO_overlap_df_sel,
-    file.path(table_dir, "Fig5F_GO_selected_terms.csv"),
-    row.names = FALSE
   )
 }

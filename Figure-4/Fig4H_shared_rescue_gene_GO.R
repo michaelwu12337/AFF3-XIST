@@ -12,12 +12,11 @@
   library(org.Hs.eg.db)
 }
 
-gene_list <- read.csv(
-  "generated_tables/shared_rescued_XIST_binding_genes_9.csv",
-  check.names = FALSE
-)$Gene
+gene_list <- c(
+  "SORCS2", "PAX7", "TTYH2", "RBFOX1", "EPHB1",
+  "CDON", "RNF165", "NAV1", "PKNOX2"
+)
 
-gene_list_GO <- gene_list
 GO_selected <- enrichGO(gene = gene_list,
                         OrgDb = "org.Hs.eg.db",
                         keyType = "SYMBOL",
@@ -37,13 +36,6 @@ df_selected <- df_selected %>%
     thresholds = "Shared rescue gene selection used p.adj < 0.05 and absolute log2FC > 0.5; GO uses clusterProfiler::enrichGO with ont = ALL and BH correction.",
     source_script = "Fig4H_shared_rescue_gene_GO.R"
   )
-
-gene_list_output <- data.frame(Gene = gene_list_GO)
-gene_list_output$analysis_name <- "Old/new shared rescued XIST-binding 9-gene GO input"
-gene_list_output$analysis_description <- "Input gene list for GO enrichment analysis of the 9 XIST-binding genes rescued in both old and new experiments."
-gene_list_output$selection_criteria <- "Genes are XIST-binding, shared between old and new rescued gene lists, and overlap the full XIST-binding list."
-gene_list_output$thresholds <- "Shared rescue gene selection used p.adj < 0.05 and absolute log2FC > 0.5."
-gene_list_output$source_script <- "Fig4H_shared_rescue_gene_GO.R"
 
 # Plotting ----------------------------------------------------------------
 
@@ -154,14 +146,3 @@ ggsave("generated_figures/Fig4H/shared_rescued_XIST_9_gene_GO_manual_selected_te
        dpi = 900,
        width = 11, height = 6.5, units = "in",
        compression = "lzw")
-
-dir.create("generated_tables", recursive = TRUE, showWarnings = FALSE)
-write.csv(gene_list_output,
-          "generated_tables/shared_rescued_XIST_9_genes_for_GO.csv",
-          row.names = FALSE)
-write.csv(df_selected,
-          "generated_tables/shared_rescued_XIST_9_gene_GO_all_terms.csv",
-          row.names = FALSE)
-write.csv(df_manual,
-          "generated_tables/shared_rescued_XIST_9_gene_GO_manual_selected_terms.csv",
-          row.names = FALSE)
