@@ -6,10 +6,8 @@
 # Input and output directories -------------------------------------------
 {
   source_dir <- "source_files"
-  table_dir <- "generated_tables"
   figure_dir <- "generated_figures/Fig4G"
 
-  dir.create(table_dir, recursive = TRUE, showWarnings = FALSE)
   dir.create(figure_dir, recursive = TRUE, showWarnings = FALSE)
 }
 
@@ -188,33 +186,12 @@
     shared_rescued_genes,
     XIST_binding_genes
   )
-
-  write.csv(
-    data.frame(Gene = old_rescued_genes),
-    file.path(table_dir, "old_rescued_genes_492.csv"),
-    row.names = FALSE
-  )
-  write.csv(
-    data.frame(Gene = new_rescued_genes),
-    file.path(table_dir, "new_rescued_genes_501.csv"),
-    row.names = FALSE
-  )
-  write.csv(
-    data.frame(Gene = shared_rescued_genes),
-    file.path(table_dir, "shared_rescued_genes_68.csv"),
-    row.names = FALSE
-  )
-  write.csv(
-    data.frame(Gene = shared_rescued_XIST_binding_genes),
-    file.path(table_dir, "shared_rescued_XIST_binding_genes_9.csv"),
-    row.names = FALSE
-  )
 }
 
 # pheatmap-style plotting -------------------------------------------------
 {
   plot_three_group_heatmap <- function(counts_Data, col_Data, sample_labels,
-                                       figure_file, table_file) {
+                                       figure_file) {
     dds <- DESeqDataSetFromMatrix(
       countData = counts_Data,
       colData = col_Data,
@@ -239,16 +216,6 @@
     z_matrix_filtered <- t(scale(t(vst_counts_filtered)))
     z_matrix_filtered <- z_matrix_filtered[complete.cases(z_matrix_filtered), ]
     colnames(z_matrix_filtered) <- sample_labels
-
-    write.csv(
-      data.frame(
-        Gene = rownames(z_matrix_filtered),
-        z_matrix_filtered,
-        check.names = FALSE
-      ),
-      table_file,
-      row.names = FALSE
-    )
 
     cols_new <- rev(RColorBrewer::brewer.pal(11, "PuOr"))
 
@@ -312,10 +279,6 @@
     figure_file = file.path(
       figure_dir,
       "Fig4G_old_WT_KO_DKO_pheatmap.tiff"
-    ),
-    table_file = file.path(
-      table_dir,
-      "old_heatmap_z_scores.csv"
     )
   )
 }
@@ -349,10 +312,6 @@
     figure_file = file.path(
       figure_dir,
       "Fig4G_new_WT_KO_KOX1_pheatmap.tiff"
-    ),
-    table_file = file.path(
-      table_dir,
-      "new_heatmap_z_scores.csv"
     )
   )
 }

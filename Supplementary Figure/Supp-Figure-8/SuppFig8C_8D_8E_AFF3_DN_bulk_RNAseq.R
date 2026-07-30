@@ -11,12 +11,10 @@
 # Input and output directories -------------------------------------------
 {
   source_dir <- "source_files"
-  table_dir <- "generated_tables"
   fig8c_dir <- file.path("generated_figures", "SuppFig8C")
   fig8d_dir <- file.path("generated_figures", "SuppFig8D")
   fig8e_dir <- file.path("generated_figures", "SuppFig8E")
 
-  dir.create(table_dir, recursive = TRUE, showWarnings = FALSE)
   dir.create(fig8c_dir, recursive = TRUE, showWarnings = FALSE)
   dir.create(fig8d_dir, recursive = TRUE, showWarnings = FALSE)
   dir.create(fig8e_dir, recursive = TRUE, showWarnings = FALSE)
@@ -133,22 +131,6 @@
   DEG_list <- res %>%
     filter(regulation %in% c("Up-regulated", "Down-regulated")) %>%
     arrange(padj)
-
-  write.csv(
-    res,
-    file.path(table_dir, "SuppFig8C_DESeq2_all_results.csv"),
-    row.names = TRUE
-  )
-  write.csv(
-    DEG_list %>% filter(regulation == "Up-regulated"),
-    file.path(table_dir, "SuppFig8C_upregulated_genes.csv"),
-    row.names = TRUE
-  )
-  write.csv(
-    DEG_list %>% filter(regulation == "Down-regulated"),
-    file.path(table_dir, "SuppFig8C_downregulated_genes.csv"),
-    row.names = TRUE
-  )
 }
 
 # Supplementary Figure 8C: WT-versus-DN scatterplot ----------------------
@@ -257,17 +239,6 @@
 
   go_up_df <- as.data.frame(go_up)
   go_down_df <- as.data.frame(go_down)
-
-  write.csv(
-    go_up_df,
-    file.path(table_dir, "SuppFig8D_GO_up_all_terms.csv"),
-    row.names = FALSE
-  )
-  write.csv(
-    go_down_df,
-    file.path(table_dir, "SuppFig8D_GO_down_all_terms.csv"),
-    row.names = FALSE
-  )
 
   go_up_bp <- go_up_df %>%
     filter(ONTOLOGY == "BP") %>%
@@ -502,27 +473,6 @@
         any(is.na(x) | is.infinite(x))
       })
     ]
-
-  write.csv(
-    z_matrix_neural_progenitor_cleaned,
-    file.path(table_dir, "SuppFig8E_neural_progenitor_z_scores.csv"),
-    row.names = TRUE
-  )
-  write.csv(
-    z_matrix_mature_neuron_core_cleaned,
-    file.path(table_dir, "SuppFig8E_mature_neuron_z_scores.csv"),
-    row.names = TRUE
-  )
-  write.csv(
-    z_matrix_excitatory_neuron,
-    file.path(table_dir, "SuppFig8E_excitatory_neuron_z_scores.csv"),
-    row.names = TRUE
-  )
-  write.csv(
-    z_matrix_inhibitory_final_cleaned,
-    file.path(table_dir, "SuppFig8E_inhibitory_neuron_z_scores.csv"),
-    row.names = TRUE
-  )
 }
 
 # Supplementary Figure 8E heatmaps ---------------------------------------
