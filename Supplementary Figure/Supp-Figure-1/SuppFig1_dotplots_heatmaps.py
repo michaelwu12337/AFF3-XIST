@@ -1,3 +1,5 @@
+# Supplementary Figure 1: dot plots and heatmaps
+
 ### Mouse embryo dataset dotplot
 
 import scanpy as sc
@@ -252,7 +254,6 @@ cbar.ax.set_position([0.80, 0.15, 0.15, 0.3])  # [left, bottom, width, height]
 plt.savefig("/mnt/davidxiang/nfs_share2/Jupyter_lab_remote/Pearson_correlation_heatmap_v20260307_notitle.png", 
             dpi=300, bbox_inches='tight')
 plt.show()
-
 
 
 

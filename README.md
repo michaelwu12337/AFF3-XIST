@@ -11,6 +11,15 @@ goes here
 
 ### Analysis script structure
 
+## Figure-1
+
+```text
+Figure-1/
+└── Fig1C_1D_scRNAseq_integration_highlight.py
+```
+
+---
+
 ## Figure-2
 
 ```text
@@ -160,6 +169,8 @@ Figure-6/source_files/
 
 ```text
 Supplementary Figure/
+├── Supp-Figure-1/
+│   └── SuppFig1_dotplots_heatmaps.py
 ├── Supp-Figure-4/
 │   └── SuppFig4B_X_linked_heatmaps.R
 ├── Supp-Figure-5/

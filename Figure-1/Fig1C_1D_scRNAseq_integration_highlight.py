@@ -1,3 +1,4 @@
+# Figure 1C-1D: scRNA-seq integration and population highlighting
 
 import scanpy as sc
 import pandas as pd
@@ -281,7 +282,5 @@ for pop in highlight_populations:
     count = (combined.obs['celltype_w345w'] == pop).sum()
     percentage = (count / combined.n_obs) * 100
     print(f"{pop}: {count} cells ({percentage:.1f}%)")
-
-
 
 
