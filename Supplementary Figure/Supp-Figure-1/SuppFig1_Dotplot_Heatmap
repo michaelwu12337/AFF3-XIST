@@ -1,0 +1,260 @@
+### Mouse embryo dataset dotplot
+
+import scanpy as sc
+import anndata as ad
+import matplotlib.pyplot as plt
+import seaborn as sns
+import scanpy as sc
+import pandas as pd
+import os
+import matplotlib
+import numpy as np
+
+
+###
+from bbknn import bbknn
+
+import palantir
+import scanpy as sc
+import pandas as pd
+import os
+import matplotlib
+import matplotlib.pyplot as plt
+
+import numpy as np
+import seaborn as sns
+
+adata_vv1 = sc.read_h5ad('GSM9046243_Embryo_E7.5_stereo_rep1.h5ad')
+adata_vv2 = sc.read_h5ad('GSM9046244_Embryo_E7.5_stereo_rep2.h5ad')
+adata_vv3 = sc.read_h5ad('GSM9046245_Embryo_E7.75_stereo_rep1.h5ad')
+adata_vv4 = sc.read_h5ad('GSM9046246_Embryo_E7.75_stereo_rep2.h5ad')
+adata_vv5 = sc.read_h5ad('GSM9046247_Embryo_E8.0_stereo_rep1.h5ad')
+adata_vv6 = sc.read_h5ad('GSM9046248_Embryo_E8.0_stereo_rep2.h5ad')
+
+
+# List of AnnData objects to process
+adata_list = [adata_vv1, adata_vv2, adata_vv3, adata_vv4, adata_vv5, adata_vv6]
+
+for i, adata in enumerate(adata_list, start=1):
+    print(f"Processing adata_vv{i}...")
+    
+    # Check if normalization is needed
+    if 'SCT' not in adata.layers:
+        print(f"Performing basic normalization for adata_vv{i}...")
+        sc.pp.normalize_total(adata, target_sum=1e4)
+        sc.pp.log1p(adata)
+    
+    # Identify highly variable genes
+    if 'highly_variable' not in adata.var.columns:
+        print(f"Identifying highly variable genes for adata_vv{i}...")
+        sc.pp.highly_variable_genes(adata, min_mean=0.0125, max_mean=3, min_disp=0.5)
+        adata = adata[:, adata.var.highly_variable]
+    
+    # Scale the data
+    print(f"Scaling data for adata_vv{i}...")
+    sc.pp.scale(adata, max_value=10)
+    
+    # Perform PCA
+    print(f"Running PCA for adata_vv{i}...")
+    sc.tl.pca(adata, svd_solver='arpack')
+    
+    # Compute neighborhood graph
+    print(f"Computing neighborhood graph for adata_vv{i}...")
+    sc.pp.neighbors(adata, n_pcs=30, n_neighbors=20)
+    
+    # Generate UMAP embedding
+    print(f"Generating UMAP embedding for adata_vv{i}...")
+    sc.tl.umap(adata)
+    
+    print(f"Finished processing adata_vv{i}\n")
+
+
+
+
+
+
+# List of AnnData objects to process
+adata_list = [adata_vv1, adata_vv2, adata_vv3, adata_vv4, adata_vv5, adata_vv6]
+genes_of_interest = ["Aff3", "Ell3"]
+
+for i, adata in enumerate(adata_list, start=1):
+    print(f"Creating dotplot for adata_vv{i}...")
+    
+    # Create the dotplot
+    sc.pl.dotplot(adata, var_names=genes_of_interest, groupby='germ_layer', show=False, figsize=(4, 4))
+    
+    # Save the plot with a unique filename
+    plt.savefig(f"/Users/yangxiang/Desktop/Dotplot_germ_layer_vv{i}.png", dpi=300, bbox_inches='tight')
+    
+    # Close the plot to free memory
+    plt.close()
+    
+    print(f"Dotplot saved for adata_vv{i}")
+
+print("All dotplots have been generated successfully!")
+
+
+
+
+
+#For mouse datasets
+#Mouse digital embryo dataset #vv1 male #vv4 male, others are female ##v3
+#Compare vv3-female with vv4-male
+
+adata_list = [adata_vv1, adata_vv2, adata_vv3, adata_vv4, adata_vv5, adata_vv6]
+genes_of_interest = ["Aff3","Mllt3","Ell3","Paf1","Tcea2"]
+
+for i, adata in enumerate(adata_list, start=1):
+    print(f"Creating dotplot for adata_vv{i}...")
+    
+    # Create the dotplot
+    sc.pl.dotplot(adata, var_names=genes_of_interest, groupby='germ_layer', show=False, figsize=(4, 4))
+    
+    # Save the plot with a unique filename
+    plt.savefig(f"/Users/yangxiang/Desktop/Dotplot_EF_vv{i}.png", dpi=300, bbox_inches='tight')
+    
+    # Close the plot to free memory
+    plt.close()
+    
+    print(f"Dotplot saved for adata_vv{i}")
+
+print("All dotplots have been generated successfully!")
+
+
+
+
+
+
+#### Gastruloid Dotplot
+
+
+genes_of_interest = ["AFF3","MLLT3","ELL3","PAF1","TCEA2","SUPT6H"]
+sc.pl.dotplot(adata_combined, var_names=genes_of_interest, groupby='celltype_v2', show=False)
+ax.set_xlabel('UMAP1', fontsize=24)
+ax.set_ylabel('UMAP2', fontsize=24)
+plt.savefig('EF_dotplot_v2.tiff', 
+            format='tiff', 
+            dpi=600, 
+            bbox_inches='tight',
+            facecolor='white',
+            edgecolor='none')
+plt.tight_layout()
+plt.show()
+
+
+
+
+#### Human Embryo Dotplot
+
+genes_of_interest = ["AFF3","MLLT3","ELL3","PAF1","TCEA2","SUPT6H"]
+
+#Dotplot
+sc.pl.dotplot(adata_w345w, genes_of_interest, groupby="celltype_w345w", standard_scale="var",show=False)
+
+# Get the current figure and adjust layout before saving
+plt.gcf().tight_layout()
+
+# Save the current figure
+plt.savefig('adata_w345w_EF_Dot_dotplot_v1.tiff', 
+            format='tiff', 
+            dpi=600, 
+            bbox_inches='tight',
+            facecolor='white',
+            edgecolor='none')
+plt.show()
+
+
+
+
+
+#### Human embryo & Gastruloids Heatmaps (Pearson correlation)
+# Assume 'combined' is your integrated AnnData object
+
+#Revised correlation analysis heatmap-version2
+
+combined_Amnion = combined[combined.obs['celltype_w345w'] == 'Amnion'].copy()
+combined_Neural_Progenitors = combined[combined.obs['celltype_w345w'] == 'Neural Progenitors'].copy()
+combined_VEC = combined[combined.obs['celltype_w345w'] == 'VEC'].copy()
+#combined_Cardiac_Mesoderm = combined[combined.obs['celltype_w345w'] == 'Cardiac Mesoderm'].copy()
+combined_Blood_Progenitors = combined[combined.obs['celltype_w345w'] == 'Blood Progenitors'].copy()
+
+combined_Early_Neural_Progenitors = combined[combined.obs['celltype_w345w'] == 'Early Neural Progenitors'].copy()
+combined_Vascular_Endothelial_cells = combined[combined.obs['celltype_w345w'] == 'Vascular Endothelial cells'].copy()
+combined_Amniotic_Epithelial_Cells = combined[combined.obs['celltype_w345w'] == 'Amniotic Epithelial Cells'].copy()
+#combined_Lateral_plate_mesoderm_Cardiac_mesoderm= combined[combined.obs['celltype_w345w'] == 'Lateral plate mesoderm/Cardiac mesoderm'].copy()
+combined_Immune_cells = combined[combined.obs['celltype_w345w'] == 'Immune cells'].copy()
+
+# Merge the subsets
+combined_merged = ad.concat([combined_Amnion, combined_Neural_Progenitors, combined_VEC, combined_Blood_Progenitors, combined_Early_Neural_Progenitors, combined_Vascular_Endothelial_cells, combined_Amniotic_Epithelial_Cells,combined_Immune_cells], join="outer")
+
+
+
+# Assume 'combined' is your integrated AnnData object
+# 1. Calculate the average expression for each cluster
+cluster_profiles = pd.DataFrame()
+for cluster in combined_merged.obs['celltype_w345w'].unique():
+    # Subset the data to the current cluster and calculate the mean expression
+    cluster_cells = combined_merged[combined_merged.obs['celltype_w345w'] == cluster]
+    mean_expression = cluster_cells.to_df().mean(axis=0) # .to_df() gets the expression matrix
+    cluster_profiles[cluster] = mean_expression
+
+# cluster_profiles is now a genes-by-clusters DataFrame
+
+# 2. Compute the correlation matrix between clusters
+correlation_matrix = cluster_profiles.corr(method='pearson') # or 'spearman'
+
+# 3. Create the heatmap
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+from matplotlib.colors import LinearSegmentedColormap
+
+# Create custom colormap
+colors = ['#3170AB', '#527FB7', '#E3E9F2', '#F7DED9', '#BA3330']
+positions = [0, 0.30, 0.50, 0.60, 1.0]
+custom_cmap = LinearSegmentedColormap.from_list('custom_blue_white_red', 
+                                               list(zip(positions, colors)))
+#BA3330
+#F7DED9
+#EDF1F8
+#8FA8CD
+#3170AB
+
+
+# Revised heatmap
+plt.figure(figsize=(10, 8))
+heatmap = sns.heatmap(correlation_matrix,
+                      vmin=0, vmax=1,  # Changed from -1,1 to 0,1 based on your range
+                      cmap=custom_cmap,
+                      annot=False,
+                      fmt=".2f",
+                      square=True,
+                      annot_kws={"size": 15},
+                      cbar_kws={
+                          'ticks': [0,1],
+                          'shrink': 0.5,
+                          'aspect': 8,
+                          'anchor': (0.0, 0.0),
+                          'panchor': (1.0, 0.0)
+                      })
+
+# Make x-axis and y-axis labels bigger
+heatmap.set_xticklabels(heatmap.get_xticklabels(), fontsize=28)
+heatmap.set_yticklabels(heatmap.get_yticklabels(), fontsize=28)
+
+# Customize colorbar
+cbar = heatmap.collections[0].colorbar
+cbar.ax.tick_params(labelsize=20)
+
+# Adjust colorbar position manually if needed
+cbar.ax.set_position([0.80, 0.15, 0.15, 0.3])  # [left, bottom, width, height]
+
+plt.savefig("/mnt/davidxiang/nfs_share2/Jupyter_lab_remote/Pearson_correlation_heatmap_v20260307_notitle.png", 
+            dpi=300, bbox_inches='tight')
+plt.show()
+
+
+
+
+
+
