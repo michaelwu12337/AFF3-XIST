@@ -6,7 +6,7 @@
 # Input and output directories -------------------------------------------
 {
   source_dir <- "source_files"
-  figure_dir <- "generated_figures/Fig4G"
+  figure_dir <- "generated_figures/Fig4H"
 
   dir.create(figure_dir, recursive = TRUE, showWarnings = FALSE)
 }
@@ -278,7 +278,7 @@
     sample_labels = c("WT 1", "WT 2", "KO 1", "KO 2", "DKO 1", "DKO 2"),
     figure_file = file.path(
       figure_dir,
-      "Fig4G_old_WT_KO_DKO_pheatmap.tiff"
+      "Fig4H_old_WT_KO_DKO_pheatmap.tiff"
     )
   )
 }
@@ -311,7 +311,7 @@
     ),
     figure_file = file.path(
       figure_dir,
-      "Fig4G_new_WT_KO_KOX1_pheatmap.tiff"
+      "Fig4H_new_WT_KO_KOX1_pheatmap.tiff"
     )
   )
 }

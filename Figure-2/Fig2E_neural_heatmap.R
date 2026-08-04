@@ -174,7 +174,7 @@ neural_heatmap <- ggplot(df_long, aes(Sample, Gene, fill = Zscore)) +
   labs(x = NULL, y = NULL)
 
 ggsave(
-  "Fig2D_neural_heatmap.tiff",
+  "Fig2E_neural_heatmap.tiff",
   plot = neural_heatmap,
   width = 4.05,
   height = 12.5,

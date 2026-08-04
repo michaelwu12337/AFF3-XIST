@@ -24,9 +24,10 @@ Figure-1/
 
 ```text
 Figure-2/
-├── Fig2C_RNAseq_scatter.R
-├── Fig2D_neural_heatmap.R
-└── Fig2F_2G_scRNA_lineage_tracking.ipynb
+├── Fig2C_gastruloid_morphology_quantification.R
+├── Fig2D_RNAseq_scatter.R
+├── Fig2E_neural_heatmap.R
+└── Fig2G_2H_scRNA_lineage_tracking.ipynb
 ```
 
 <details>
@@ -34,6 +35,7 @@ Figure-2/
 
 ```text
 Figure-2/source_files/
+├── Fig2C_gastruloid_morphology_counts.csv
 ├── AFF3_F_KO_1_mm_counts_revised.txt
 ├── AFF3_F_KO_2_mm_counts_revised.txt
 ├── AFF3_F_WT_1_mm_counts_revised.txt
@@ -94,8 +96,9 @@ Figure-3/source_files/
 
 ```text
 Figure-4/
-├── Fig4G_shared_rescue_gene_heatmaps.R
-└── Fig4H_shared_rescue_gene_GO.R
+├── Fig4E_gastruloid_morphology_quantification.R
+├── Fig4H_shared_rescue_gene_heatmaps.R
+└── Fig4I_shared_rescue_gene_GO.R
 ```
 
 <details>
@@ -103,6 +106,7 @@ Figure-4/
 
 ```text
 Figure-4/source_files/
+├── Fig4E_gastruloid_morphology_counts.csv
 ├── AFF3_F_KO_1_mm_counts_revised.txt
 ├── AFF3_F_KO_2_mm_counts_revised.txt
 ├── AFF3_F_KO_Xt_KO_A3_1_mm_counts_revised.txt

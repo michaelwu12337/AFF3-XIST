@@ -5,7 +5,7 @@
   library(dplyr)
 }
 
-# Female RNA-seq scatterplot
+# Figure 2D: female RNA-seq scatterplot
 
 # Read count files
 {
@@ -183,7 +183,7 @@ ggsave(
   compression = "lzw"
 )
 
-# Male RNA-seq scatterplot
+# Figure 2D: male RNA-seq scatterplot
 
 # Read count files
 {
