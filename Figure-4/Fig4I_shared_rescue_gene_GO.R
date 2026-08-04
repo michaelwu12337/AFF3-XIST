@@ -34,7 +34,7 @@ df_selected <- df_selected %>%
     analysis_description = "GO enrichment analysis for the 9 genes that are XIST-binding and rescued in both old and new experiments.",
     selection_criteria = "Genes are XIST-binding, shared between old and new rescued gene lists, and overlap the full XIST-binding list.",
     thresholds = "Shared rescue gene selection used p.adj < 0.05 and absolute log2FC > 0.5; GO uses clusterProfiler::enrichGO with ont = ALL and BH correction.",
-    source_script = "Fig4H_shared_rescue_gene_GO.R"
+    source_script = "Fig4I_shared_rescue_gene_GO.R"
   )
 
 # Plotting ----------------------------------------------------------------
@@ -58,9 +58,9 @@ pl <- ggplot(df_selected %>% slice_max(order_by = neglog10p, n = 10, with_ties =
     legend.text = element_text(size = 13)
   )
 
-dir.create("generated_figures/Fig4H", recursive = TRUE, showWarnings = FALSE)
+dir.create("generated_figures/Fig4I", recursive = TRUE, showWarnings = FALSE)
 
-ggsave("generated_figures/Fig4H/shared_rescued_XIST_9_gene_GO_top10.tiff",
+ggsave("generated_figures/Fig4I/shared_rescued_XIST_9_gene_GO_top10.tiff",
        plot = pl,
        device = "tiff",
        dpi = 900,
@@ -86,7 +86,7 @@ pl_top20 <- ggplot(df_selected %>% slice_max(order_by = neglog10p, n = 20, with_
     legend.text = element_text(size = 13)
   )
 
-ggsave("generated_figures/Fig4H/shared_rescued_XIST_9_gene_GO_top20.tiff",
+ggsave("generated_figures/Fig4I/shared_rescued_XIST_9_gene_GO_top20.tiff",
        plot = pl_top20,
        device = "tiff",
        dpi = 900,
@@ -140,7 +140,7 @@ pl_manual <- ggplot(df_manual,
     legend.text = element_text(size = 20)
   )
 
-ggsave("generated_figures/Fig4H/shared_rescued_XIST_9_gene_GO_manual_selected_terms.tiff",
+ggsave("generated_figures/Fig4I/shared_rescued_XIST_9_gene_GO_manual_selected_terms.tiff",
        plot = pl_manual,
        device = "tiff",
        dpi = 900,
