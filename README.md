@@ -171,6 +171,8 @@ Figure-6/source_files/
 Supplementary Figure/
 ├── Supp-Figure-1/
 │   └── SuppFig1_dotplots_heatmaps.py
+├── Supp-Figure-3/
+│   └── SuppFig3A_3B_3C_TemporalVAE_query_projection.ipynb
 ├── Supp-Figure-4/
 │   └── SuppFig4B_X_linked_heatmaps.R
 ├── Supp-Figure-5/
