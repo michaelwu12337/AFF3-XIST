@@ -87,7 +87,7 @@ ggsave(
     "source_files/Fig3F_RNA_FISH_intensity.csv"
   ) %>%
     mutate(Group = factor(Group, levels = c("WT", "KO")),
-           Value_div_1000 = Value / 1000)  # Create a new column with values divided by 1000
+           Value_div_1000 = Value / 1000)  # intensity is plotted in thousands
   
   ## ===============================
   ## Colors (filled bars; GraphPad-like) ----
@@ -104,7 +104,7 @@ ggsave(
   sum_df <- df1 %>%
     group_by(Group) %>%
     summarise(
-      mean = mean(Value_div_1000, na.rm = TRUE),  # Use new column
+      mean = mean(Value_div_1000, na.rm = TRUE),  # summary uses the rescaled values
       sem  = sd(Value_div_1000, na.rm = TRUE) / sqrt(sum(!is.na(Value_div_1000))),
       .groups = "drop"
     )
@@ -113,12 +113,12 @@ ggsave(
   ## Stats (rstatix -> stat_pvalue_manual) ----
   {
     stat_test <- df1 %>%
-      t_test(Value_div_1000 ~ Group) %>%  # Use new column
+      t_test(Value_div_1000 ~ Group) %>%  # test the same rescaled values
       add_significance("p") %>%
-      add_xy_position(x = "Group")   # creates xmin/xmax
+      add_xy_position(x = "Group")   # adds xmin/xmax for the bracket
     
-    # set annotation height nicely above the highest point
-    y_max <- max(df1$Value_div_1000, na.rm = TRUE)  # Use new column
+    # put the bracket just above the highest point
+    y_max <- max(df1$Value_div_1000, na.rm = TRUE)  # highest plotted value
     stat_test$y.position <- y_max * 1.12
   }
 }
@@ -146,14 +146,14 @@ ggsave(
     ## points: WT triangles, KO diamonds (all data points shown)
     geom_jitter(
       data = df1 %>% filter(Group == "WT"),
-      aes(x = Group, y = Value_div_1000),  # Use new column
+      aes(x = Group, y = Value_div_1000),  # WT values
       shape = 17, size = 3,
       color = wt_pt,
       width = 0.08, height = 0
     ) +
     geom_jitter(
       data = df1 %>% filter(Group == "KO"),
-      aes(x = Group, y = Value_div_1000),  # Use new column
+      aes(x = Group, y = Value_div_1000),  # KO values
       shape = 18, size = 3,
       color = ko_pt,
       width = 0.08, height = 0
@@ -168,7 +168,7 @@ ggsave(
     ) +
     scale_y_continuous(
       limits = c(0, y_max * 1.20),
-      breaks = c(0, 5, 10, 15, 20),  # Adjust as needed
+      breaks = c(0, 5, 10, 15, 20),  # fixed breaks used for this panel
       expand = c(0, 0)
     ) +
     theme_classic(base_size = 14) +

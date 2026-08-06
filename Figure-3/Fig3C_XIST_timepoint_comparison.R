@@ -143,10 +143,10 @@
       Condition  = factor(Condition, levels = c("WT", "KO")),
       GroupID    = paste0(Condition, "_", Time_point),
       
-      # which violins are filled: WT_8 gets special blue fill
+      # WT day 8 has the blue fill used in the figure
       FillGroup = ifelse(GroupID == "WT_8", "WT_8_special", as.character(Condition)),
       
-      # groups for the legend (4 visual categories)
+      # four legend groups, kept seperate for fill and outline
       LegendGroup = case_when(
         FillGroup == "WT" ~ "WT_filled",                                 # orange filled
         FillGroup == "WT_8_special" ~ "WT_special_filled",               # blue filled
@@ -154,7 +154,7 @@
         FillGroup == "KO" ~ "KO_orange_outline"                          # orange outline
       ),
       
-      # order controls legend order (and dodge grouping)
+      # this order also controls the dodge
       LegendGroup = factor(
         LegendGroup,
         levels = c("WT_filled",                 # F WT
@@ -189,7 +189,7 @@
   )
 }
 
-## ---- make summary for bar heights (mean ± SE) ----
+## mean and SE for the bar heights
 {
   bar_df <- xist_data %>%
     group_by(Time_point, LegendGroup) %>%
@@ -199,7 +199,7 @@
       .groups = "drop"
     )
   
-  ## ---- bar plot (replaces violin + boxplot) ----
+  ## bar version used in the final figure
   m <- ggplot(
     bar_df,
     aes(x = Time_point, y = mean, fill = LegendGroup, color = LegendGroup)
@@ -243,7 +243,7 @@
       legend.title= element_text(size = 16, colour = "black")
     )
   
-  ## ---- stats stay the same (use xist_data, not bar_df) ----
+  ## stats still use the individual values in xist_data
   {
     stat_test_within <- xist_data %>%
       group_by(Time_point) %>%
@@ -262,12 +262,12 @@
       )
   }
   
-  ## ---- gapped y axis stays the same ----
+  ## keep the same gapped y axis
   m_broken <- m +
     scale_y_break(c(20, 160), scales = 0.7, space = 0.3) +
     scale_y_break(c(220, 550), scales = 0.8, space = 0.3) +
     scale_y_continuous(
-      limits = c(0, 700),          # <-- 0 is now the only baseline
+      limits = c(0, 700),          # zero stays as the common baseline
       breaks = c(
         seq(0, 20, by = 5),
         seq(160, 220, by = 20),
@@ -297,12 +297,12 @@
       aes(
         x = Time_point,
         y = XIST_norm,
-        color = LegendGroup,   # matches your bar outlines
+        color = LegendGroup,   # same outline colors as the bars
         shape = Condition,     # WT vs KO shape
-        group = LegendGroup    # IMPORTANT: dodge by LegendGroup
+        group = LegendGroup    # dodge follows LegendGroup here
       ),
       position = position_jitterdodge(
-        dodge.width  = 0.8,    # must match your bar dodge
+        dodge.width  = 0.8,    # same width as the bars or points shift
         jitter.width = 0.10,
         jitter.height = 0
       ),

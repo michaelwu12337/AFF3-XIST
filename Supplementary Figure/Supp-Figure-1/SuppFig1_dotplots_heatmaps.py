@@ -34,37 +34,37 @@ adata_vv5 = sc.read_h5ad('GSM9046247_Embryo_E8.0_stereo_rep1.h5ad')
 adata_vv6 = sc.read_h5ad('GSM9046248_Embryo_E8.0_stereo_rep2.h5ad')
 
 
-# List of AnnData objects to process
+# run the same preprocessing over all six embryos
 adata_list = [adata_vv1, adata_vv2, adata_vv3, adata_vv4, adata_vv5, adata_vv6]
 
 for i, adata in enumerate(adata_list, start=1):
     print(f"Processing adata_vv{i}...")
     
-    # Check if normalization is needed
+    # normalize only when SCT is not already there
     if 'SCT' not in adata.layers:
         print(f"Performing basic normalization for adata_vv{i}...")
         sc.pp.normalize_total(adata, target_sum=1e4)
         sc.pp.log1p(adata)
     
-    # Identify highly variable genes
+    # pick variable genes if this object does not have them yet
     if 'highly_variable' not in adata.var.columns:
         print(f"Identifying highly variable genes for adata_vv{i}...")
         sc.pp.highly_variable_genes(adata, min_mean=0.0125, max_mean=3, min_disp=0.5)
         adata = adata[:, adata.var.highly_variable]
     
-    # Scale the data
+    # scaling before PCA
     print(f"Scaling data for adata_vv{i}...")
     sc.pp.scale(adata, max_value=10)
     
-    # Perform PCA
+    # PCA
     print(f"Running PCA for adata_vv{i}...")
     sc.tl.pca(adata, svd_solver='arpack')
     
-    # Compute neighborhood graph
+    # neighbors for the UMAP
     print(f"Computing neighborhood graph for adata_vv{i}...")
     sc.pp.neighbors(adata, n_pcs=30, n_neighbors=20)
     
-    # Generate UMAP embedding
+    # UMAP embedding
     print(f"Generating UMAP embedding for adata_vv{i}...")
     sc.tl.umap(adata)
     
@@ -75,20 +75,20 @@ for i, adata in enumerate(adata_list, start=1):
 
 
 
-# List of AnnData objects to process
+# Aff3/Ell3 dotplots for each embryo
 adata_list = [adata_vv1, adata_vv2, adata_vv3, adata_vv4, adata_vv5, adata_vv6]
 genes_of_interest = ["Aff3", "Ell3"]
 
 for i, adata in enumerate(adata_list, start=1):
     print(f"Creating dotplot for adata_vv{i}...")
     
-    # Create the dotplot
+    # dotplot for this embryo
     sc.pl.dotplot(adata, var_names=genes_of_interest, groupby='germ_layer', show=False, figsize=(4, 4))
     
-    # Save the plot with a unique filename
+    # keep a seperate file for each embryo
     plt.savefig(f"/Users/yangxiang/Desktop/Dotplot_germ_layer_vv{i}.png", dpi=300, bbox_inches='tight')
     
-    # Close the plot to free memory
+    # close it before the next one, otherwise memory piles up
     plt.close()
     
     print(f"Dotplot saved for adata_vv{i}")
@@ -109,13 +109,13 @@ genes_of_interest = ["Aff3","Mllt3","Ell3","Paf1","Tcea2"]
 for i, adata in enumerate(adata_list, start=1):
     print(f"Creating dotplot for adata_vv{i}...")
     
-    # Create the dotplot
+    # dotplot for this embryo
     sc.pl.dotplot(adata, var_names=genes_of_interest, groupby='germ_layer', show=False, figsize=(4, 4))
     
-    # Save the plot with a unique filename
+    # one output per embryo
     plt.savefig(f"/Users/yangxiang/Desktop/Dotplot_EF_vv{i}.png", dpi=300, bbox_inches='tight')
     
-    # Close the plot to free memory
+    # close before moving on
     plt.close()
     
     print(f"Dotplot saved for adata_vv{i}")
@@ -146,6 +146,7 @@ plt.show()
 
 
 
+
 #### Human Embryo Dotplot
 
 genes_of_interest = ["AFF3","MLLT3","ELL3","PAF1","TCEA2","SUPT6H"]
@@ -153,10 +154,10 @@ genes_of_interest = ["AFF3","MLLT3","ELL3","PAF1","TCEA2","SUPT6H"]
 #Dotplot
 sc.pl.dotplot(adata_w345w, genes_of_interest, groupby="celltype_w345w", standard_scale="var",show=False)
 
-# Get the current figure and adjust layout before saving
+# grab the current figure and tighten it before saving
 plt.gcf().tight_layout()
 
-# Save the current figure
+# save this one as TIFF
 plt.savefig('adata_w345w_EF_Dot_dotplot_v1.tiff', 
             format='tiff', 
             dpi=600, 
@@ -170,7 +171,7 @@ plt.show()
 
 
 #### Human embryo & Gastruloids Heatmaps (Pearson correlation)
-# Assume 'combined' is your integrated AnnData object
+# combined is the integrated object from Figure 1
 
 #Revised correlation analysis heatmap-version2
 
@@ -186,32 +187,32 @@ combined_Amniotic_Epithelial_Cells = combined[combined.obs['celltype_w345w'] == 
 #combined_Lateral_plate_mesoderm_Cardiac_mesoderm= combined[combined.obs['celltype_w345w'] == 'Lateral plate mesoderm/Cardiac mesoderm'].copy()
 combined_Immune_cells = combined[combined.obs['celltype_w345w'] == 'Immune cells'].copy()
 
-# Merge the subsets
+# put the selected cell types back together
 combined_merged = ad.concat([combined_Amnion, combined_Neural_Progenitors, combined_VEC, combined_Blood_Progenitors, combined_Early_Neural_Progenitors, combined_Vascular_Endothelial_cells, combined_Amniotic_Epithelial_Cells,combined_Immune_cells], join="outer")
 
 
 
-# Assume 'combined' is your integrated AnnData object
-# 1. Calculate the average expression for each cluster
+# average expression for each cluster in the merged subset
+# this second pass uses the merged object above
 cluster_profiles = pd.DataFrame()
 for cluster in combined_merged.obs['celltype_w345w'].unique():
-    # Subset the data to the current cluster and calculate the mean expression
+    # mean expression within this cluster
     cluster_cells = combined_merged[combined_merged.obs['celltype_w345w'] == cluster]
     mean_expression = cluster_cells.to_df().mean(axis=0) # .to_df() gets the expression matrix
     cluster_profiles[cluster] = mean_expression
 
-# cluster_profiles is now a genes-by-clusters DataFrame
+# rows are genes and columns are clusters now
 
-# 2. Compute the correlation matrix between clusters
-correlation_matrix = cluster_profiles.corr(method='pearson') # or 'spearman'
+# correlation between the cluster profiles
+correlation_matrix = cluster_profiles.corr(method='pearson') # spearman was another option here
 
-# 3. Create the heatmap
+# heatmap
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from matplotlib.colors import LinearSegmentedColormap
 
-# Create custom colormap
+# colors used for this heatmap
 colors = ['#3170AB', '#527FB7', '#E3E9F2', '#F7DED9', '#BA3330']
 positions = [0, 0.30, 0.50, 0.60, 1.0]
 custom_cmap = LinearSegmentedColormap.from_list('custom_blue_white_red', 
@@ -223,10 +224,10 @@ custom_cmap = LinearSegmentedColormap.from_list('custom_blue_white_red',
 #3170AB
 
 
-# Revised heatmap
+# revised heatmap version
 plt.figure(figsize=(10, 8))
 heatmap = sns.heatmap(correlation_matrix,
-                      vmin=0, vmax=1,  # Changed from -1,1 to 0,1 based on your range
+                      vmin=0, vmax=1,  # 0-1 is useful here; an older try used -1 to 1
                       cmap=custom_cmap,
                       annot=False,
                       fmt=".2f",
@@ -240,22 +241,21 @@ heatmap = sns.heatmap(correlation_matrix,
                           'panchor': (1.0, 0.0)
                       })
 
-# Make x-axis and y-axis labels bigger
+# larger labels to match the slide
 heatmap.set_xticklabels(heatmap.get_xticklabels(), fontsize=28)
 heatmap.set_yticklabels(heatmap.get_yticklabels(), fontsize=28)
 
-# Customize colorbar
+# colorbar sizing was done seperately
+# this bit is only for the colorbar
 cbar = heatmap.collections[0].colorbar
 cbar.ax.tick_params(labelsize=20)
 
-# Adjust colorbar position manually if needed
+# move the colorbar by hand, it was easier this way
 cbar.ax.set_position([0.80, 0.15, 0.15, 0.3])  # [left, bottom, width, height]
 
 plt.savefig("/mnt/davidxiang/nfs_share2/Jupyter_lab_remote/Pearson_correlation_heatmap_v20260307_notitle.png", 
             dpi=300, bbox_inches='tight')
 plt.show()
 
-
-
-
-
+# heatmap part ends here
+# thats all for this file
