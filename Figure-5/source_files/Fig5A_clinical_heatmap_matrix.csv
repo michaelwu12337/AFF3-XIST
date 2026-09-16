@@ -1,0 +1,31 @@
+Plot_order,Patient,Source_patient,Variant_group,Sex,DD_ID_severe,DD_ID_moderate,DD_ID_mild,Seizure_abnormal_EEG,Brain_MRI_abnormality,Muscle_tone_abnormality,Skeletal_abnormality
+1,L12,L12,LoF,F,1,0,0,0,,1,1
+2,L6,L6,LoF,F,0,1,0,,1,1,1
+3,L7,L7 | DECIPHER sample 281982,LoF,F,0,1,0,0,0,0,0
+4,L14,L14,LoF,F,0,0,1,0,,,
+5,L5,L5,LoF,M,,,,,1,1,
+6,L2,L2,LoF,M,0,1,0,,1,1,
+7,L3,L3,LoF,M,0,1,0,0,1,1,0
+8,L1,L1,LoF,M,0,1,0,0,1,1,
+9,L8,L8 | DECIPHER | Sample 305794,LoF,M,0,0,1,,,1,
+10,L13,L13,LoF,M,0,0,1,0,,,1
+11,L10,L10,LoF,M,0,0,1,0,0,0,1
+12,L4,L4,LoF,M,0,0,1,,,,
+13,L9,L9,LoF,M,0,0,1,0,,,
+14,L11,L11,LoF,M,,,,,,,
+15,P3,Proband 3,DN,M,1,0,0,1,1,1,1
+16,P4,Proband 4,DN,F,1,0,0,1,1,1,1
+17,P5,Proband 5,DN,F,1,0,0,1,1,1,1
+18,P6,Proband 6,DN,M,1,0,0,1,1,1,1
+19,P7,Proband 7,DN,M,1,0,0,1,1,1,1
+20,P9,Proband 9,DN,F,1,0,0,1,1,1,1
+21,P10,Proband 10,DN,F,1,0,0,1,1,1,1
+22,P11,Proband 11,DN,F,1,0,0,1,1,1,1
+23,P12,Proband 12,DN,F,1,0,0,1,1,1,1
+24,P14,Proband 14,DN,F,1,0,0,1,1,1,1
+25,P1,Proband 1,DN,M,1,0,0,0,1,1,1
+26,P8,Proband 8,DN,F,1,0,0,1,,1,1
+27,P15,Proband 15,DN,M,1,0,0,1,,1,1
+28,JP,Japanese proband*,DN,F,1,0,0,0,0,1,1
+29,P2,Proband 2,DN,M,1,0,0,0,,,
+30,P13,Proband 13,DN,M,1,0,0,0,0,0,1

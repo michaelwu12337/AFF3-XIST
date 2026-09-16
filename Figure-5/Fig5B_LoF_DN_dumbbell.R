@@ -6,56 +6,72 @@
 # Input and output directories -------------------------------------------
 {
   source_dir <- "source_files"
-  figure_dir <- file.path("generated_figures", "Fig6B")
+  figure_dir <- file.path("generated_figures", "Fig5B")
 
   dir.create(figure_dir, recursive = TRUE, showWarnings = FALSE)
 }
 
-# Sex-stratified percentages used in the v46 dumbbell plot --------------
+# Percentages for the LoF and DN comparison -----------------------------
 {
   kinssh_bp <- read.csv(
-    file.path(source_dir, "Fig6B_sex_dumbbell_summary.csv"),
+    file.path(source_dir, "Fig5B_LoF_DN_dumbbell_summary.csv"),
     check.names = FALSE,
     stringsAsFactors = FALSE
   )
+
+  phenotype_order <- c(
+    "Severe DD/ID",
+    "Seizure/EEG",
+    "Abnormal brain MRI",
+    "Abnormal muscle tone"
+  )
+
+  kinssh_bp <- kinssh_bp %>%
+    filter(Label %in% phenotype_order) %>%
+    mutate(
+      Label = factor(Label, levels = rev(phenotype_order))
+    )
 }
 
-# Figure 6B --------------------------------------------------------------
+# Figure 5B --------------------------------------------------------------
 {
   fig6b_plot <- ggplot(
     kinssh_bp,
-    aes(y = fct_reorder(Variable, Female_pct - Male_pct))
+    aes(y = Label)
   ) +
     geom_segment(
       aes(
-        x = Male_pct,
-        xend = Female_pct,
-        y = Variable,
-        yend = Variable
+        x = LoF_pct,
+        xend = DN_pct,
+        yend = Label
       ),
       color = "grey70",
       linewidth = 1.1
     ) +
     geom_point(
-      aes(x = Male_pct, y = Variable, colour = "Male"),
+      aes(x = LoF_pct, colour = "LoF"),
       size = 7
     ) +
     geom_point(
-      aes(x = Female_pct, y = Variable, colour = "Female"),
+      aes(x = DN_pct, colour = "DN"),
       size = 7
     ) +
     scale_colour_manual(
       name = NULL,
+      breaks = c("LoF", "DN"),
       values = c(
-        "Female" = "#E36B6B",
-        "Male" = "#3C8DBC"
+        "LoF" = "#C44E52",
+        "DN" = "#4C72B0"
       )
     ) +
     scale_x_continuous(
-      name = "Patients with symptom (%)",
-      limits = c(-5, 60),
-      breaks = seq(0, 60, 20),
-      expand = expansion(mult = c(0, 0.05))
+      name = "Patients with phenotype (%)",
+      limits = c(-5, 105),
+      breaks = seq(0, 100, 20),
+      expand = expansion(mult = c(0, 0))
+    ) +
+    scale_y_discrete(
+      labels = function(label) stringr::str_wrap(label, width = 16)
     ) +
     labs(
       y = NULL,
@@ -75,10 +91,10 @@
     )
 
   ggsave(
-    file.path(figure_dir, "Fig6B_sex_dumbbell.tiff"),
+    file.path(figure_dir, "Fig5B_LoF_DN_dumbbell.tiff"),
     plot = fig6b_plot,
-    width = 12,
-    height = 6,
+    width = 9,
+    height = 8,
     units = "in",
     dpi = 600,
     limitsize = FALSE,

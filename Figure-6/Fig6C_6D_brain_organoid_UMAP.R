@@ -12,11 +12,11 @@
     "source_files",
     "AFF3_integrated_final_v3.rds"
   )
-  fig5c_dir <- file.path("generated_figures", "Fig5C")
-  fig5d_dir <- file.path("generated_figures", "Fig5D")
+  fig6c_dir <- file.path("generated_figures", "Fig6C")
+  fig6d_dir <- file.path("generated_figures", "Fig6D")
 
-  dir.create(fig5c_dir, recursive = TRUE, showWarnings = FALSE)
-  dir.create(fig5d_dir, recursive = TRUE, showWarnings = FALSE)
+  dir.create(fig6c_dir, recursive = TRUE, showWarnings = FALSE)
+  dir.create(fig6d_dir, recursive = TRUE, showWarnings = FALSE)
 }
 
 # Load the integrated brain-organoid single-cell object ------------------
@@ -70,7 +70,7 @@
   )
 }
 
-# Figure 5C: annotated brain-organoid UMAP -------------------------------
+# Figure 6C: annotated brain-organoid UMAP -------------------------------
 {
   cluster_colors <- c(
     "Neural_crest_or_non_ectodermal" = "#C5926D",
@@ -94,7 +94,7 @@
 
   point_size <- 0.5
 
-  fig5c_plot <- DimPlot(
+  fig6c_plot <- DimPlot(
     integrated_labelv3,
     group.by = "cell_type",
     reduction = "umap",
@@ -121,8 +121,8 @@
     labs(x = NULL, y = NULL, title = NULL)
 
   ggsave(
-    file.path(fig5c_dir, "Fig5C_brain_organoid_UMAP.tiff"),
-    plot = fig5c_plot,
+    file.path(fig6c_dir, "Fig6C_brain_organoid_UMAP.tiff"),
+    plot = fig6c_plot,
     width = 9,
     height = 8,
     units = "in",
@@ -132,7 +132,7 @@
   )
 }
 
-# Figure 5D: SFRP2 expression in WT, KO, and DKO ------------------------
+# Figure 6D: SFRP2 expression in WT, KO, and DKO ------------------------
 {
   gene <- "SFRP2"
 
@@ -186,7 +186,7 @@
   p_DKO <- p_DKO + clean_theme
 
   ggsave(
-    file.path(fig5d_dir, "Fig5D_SFRP2_WT.tiff"),
+    file.path(fig6d_dir, "Fig6D_SFRP2_WT.tiff"),
     plot = p_WT,
     width = 3,
     height = 2.5,
@@ -195,7 +195,7 @@
     compression = "lzw"
   )
   ggsave(
-    file.path(fig5d_dir, "Fig5D_SFRP2_KO.tiff"),
+    file.path(fig6d_dir, "Fig6D_SFRP2_KO.tiff"),
     plot = p_KO,
     width = 3,
     height = 2.5,
@@ -204,7 +204,7 @@
     compression = "lzw"
   )
   ggsave(
-    file.path(fig5d_dir, "Fig5D_SFRP2_DKO.tiff"),
+    file.path(fig6d_dir, "Fig6D_SFRP2_DKO.tiff"),
     plot = p_DKO,
     width = 3,
     height = 2.5,
