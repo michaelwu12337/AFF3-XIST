@@ -1,0 +1,7 @@
+Variable,Label,LoF_pct,LoF_n,DN_pct,DN_n
+DD_ID_severe,Severe DD/ID,8.33,1/12,100.00,16/16
+DD_ID_moderate,Moderate DD/ID,41.67,5/12,0.00,0/16
+DD_ID_mild,Mild DD/ID,50.00,6/12,0.00,0/16
+Seizure_abnormal_EEG,Seizure/EEG,0.00,0/8,75.00,12/16
+Brain_MRI_abnormality,Abnormal brain MRI,71.43,5/7,84.62,11/13
+Muscle_tone_abnormality,Abnormal muscle tone,77.78,7/9,93.33,14/15

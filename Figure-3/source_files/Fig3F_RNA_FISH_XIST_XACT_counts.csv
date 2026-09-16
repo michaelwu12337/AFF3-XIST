@@ -1,0 +1,5 @@
+Group,XIST_status,XACT_status,Approximate_count
+WT,NO_XIST,Mono_XACT,3
+WT,NO_XIST,Bi_XACT,3
+KO,Mono_XIST,Mono_XACT,7
+KO,Bi_XIST,Mono_XACT,3

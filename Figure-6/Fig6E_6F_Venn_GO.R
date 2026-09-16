@@ -12,11 +12,11 @@
 # Input and output directories -------------------------------------------
 {
   source_dir <- "source_files"
-  fig5e_dir <- file.path("generated_figures", "Fig5E")
-  fig5f_dir <- file.path("generated_figures", "Fig5F")
+  fig6e_dir <- file.path("generated_figures", "Fig6E")
+  fig6f_dir <- file.path("generated_figures", "Fig6F")
 
-  dir.create(fig5e_dir, recursive = TRUE, showWarnings = FALSE)
-  dir.create(fig5f_dir, recursive = TRUE, showWarnings = FALSE)
+  dir.create(fig6e_dir, recursive = TRUE, showWarnings = FALSE)
+  dir.create(fig6f_dir, recursive = TRUE, showWarnings = FALSE)
 }
 
 # Gene sets used in the v46 Venn diagram ---------------------------------
@@ -44,7 +44,7 @@
     unique()
 }
 
-# Figure 5E: DKO-rescued genes and autosomal XIST targets ----------------
+# Figure 6E: DKO-rescued genes and autosomal XIST targets ----------------
 {
   venn_plot <- venn.diagram(
     x = list(
@@ -71,7 +71,7 @@
   )
 
   svglite(
-    file.path(fig5e_dir, "Fig5E_DKO_rescued_XIST_target_Venn.svg"),
+    file.path(fig6e_dir, "Fig6E_DKO_rescued_XIST_target_Venn.svg"),
     bg = "transparent",
     width = 8,
     height = 6
@@ -90,7 +90,7 @@
   overlap <- intersect(set_xist, set_dko)
 }
 
-# Figure 5F: GO analysis of the 44 overlapping genes ---------------------
+# Figure 6F: GO analysis of the 44 overlapping genes ---------------------
 {
   GO_overlap <- enrichGO(
     gene = overlap,
@@ -124,10 +124,10 @@
       )
     ) |>
     mutate(
-      Description = stringr::str_wrap(Description_raw, width = 40)
+      Description = stringr::str_wrap(Description_raw, width = 28)
     )
 
-  fig5f_plot <- ggplot(
+  fig6f_plot <- ggplot(
     GO_overlap_df_sel |>
       slice_max(order_by = neglog10p, n = 5),
     aes(
@@ -138,7 +138,7 @@
   ) +
     geom_col(
       color = "black",
-      width = 0.8,
+      width = 0.9,
       linewidth = 1.4
     ) +
     labs(
@@ -168,10 +168,10 @@
     )
 
   ggsave(
-    file.path(fig5f_dir, "Fig5F_DKO_rescued_XIST_target_GO.tiff"),
-    plot = fig5f_plot,
-    width = 15,
-    height = 6,
+    file.path(fig6f_dir, "Fig6F_DKO_rescued_XIST_target_GO.tiff"),
+    plot = fig6f_plot,
+    width = 14.5,
+    height = 7.5,
     units = "in",
     dpi = 600,
     limitsize = FALSE,

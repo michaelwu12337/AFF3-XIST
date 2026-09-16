@@ -146,3 +146,42 @@ ggsave("generated_figures/Fig4I/shared_rescued_XIST_9_gene_GO_manual_selected_te
        dpi = 900,
        width = 11, height = 6.5, units = "in",
        compression = "lzw")
+
+# Wider, flatter layout for the main-figure panel. The GO terms, enrichment
+# values, ordering, and colour scale are identical to the original version.
+wide_wrap_width <- 48
+
+df_manual_wide <- df_manual %>%
+  mutate(
+    Description_manual_wide_text = str_wrap(Description_clean, width = wide_wrap_width),
+    Description_manual_wide = factor(
+      Description_manual_wide_text,
+      levels = rev(str_wrap(manual_terms, width = wide_wrap_width))
+    )
+  )
+
+pl_manual_wide <- ggplot(df_manual_wide,
+                         aes(x = neglog10p,
+                             y = Description_manual_wide,
+                             fill = log2_OE)) +
+  geom_col(color = "black") +
+  labs(x = "-log10(p.adj)", y = NULL, fill = "log2(O/E)") +
+  scale_fill_gradient(low = "#E6EEF6",
+                      high = "#2C7BB6",
+                      labels = scales::number_format(accuracy = 0.1),
+                      guide = guide_colorbar(frame.colour = "black", ticks.colour = "black")) +
+  theme_classic() +
+  theme(
+    axis.text.y = element_text(size = 24),
+    axis.title.x = element_text(size = 22),
+    axis.text.x = element_text(size = 20),
+    legend.title = element_text(size = 22),
+    legend.text = element_text(size = 20)
+  )
+
+ggsave("generated_figures/Fig4I/shared_rescued_XIST_9_gene_GO_manual_selected_terms_wide_flat.tiff",
+       plot = pl_manual_wide,
+       device = "tiff",
+       dpi = 900,
+       width = 14, height = 4.5, units = "in",
+       compression = "lzw")
